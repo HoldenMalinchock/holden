@@ -3,9 +3,7 @@
         <div class="flex flex-col">
             <h1 class="text-xl font-mono font-bold flex">{{ props.title }}</h1>
             <span class="text-bold flex mt-4">{{ props.description }}</span>
-            <div class="flex-col">
-                <span v-for="language in languages" class="text-bold mt-4 underline me-4">{{ language }}</span>
-            </div>
+            <span class="text-bold text-primary-300 mt-3">{{ languages.join(", ") }}</span>
             <ULink v-if="props.link" :to="props.link" :external="true" class="text-bold mt-4 underline">{{ link }}</ULink>
             <UButton
                 :padded="false"
