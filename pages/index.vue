@@ -3,7 +3,7 @@
         <div class="ms-8">
             <h1 class="text-6xl font-mono font-bold flex ">Hi, I'm <span class="text-primary">&nbsp;Holden.</span></h1>
             <span class="text-bold flex w-1/2 mt-4">I am a Lead Full Stack Software Engineer based in Charleston, SC at Adapt Forward.
-                I specialize in Vuejs, Nuxt and typescript.  I am a major advocate for Deno which is what hosts this website.</span>
+                I specialize in Vuejs, Nuxt and typescript.  I am a major advocate for Deno which is what hosts this website. </span>
             <div class="mt-36 me-12">
                 <Experience />
             </div>
@@ -17,7 +17,7 @@
 <script setup lang="ts">
 const projects = [
     {
-        title: "ThetaGang Trading Calculator",
+        title: "Trading Calculator for ThetaGang.com",
         description: "This project was built to compile data from thetagang.com and provide statistics and analytics for the ThetaGang community.",
         languages: ["Typescript", "Deno", "Deno Fresh"],
         github: "https://github.com/HoldenMalinchock/thetagang-calc",
