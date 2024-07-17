@@ -1,9 +1,13 @@
 <template>
     <div class="flex">
         <div class="ms-8">
-            <h1 class="text-6xl font-mono font-bold flex ">Hi, I'm Holden.</h1>
+            <h1 class="text-6xl font-mono font-bold flex ">Hi, I'm <span class="text-primary">&nbsp;Holden.</span></h1>
             <span class="text-bold flex w-1/2 mt-4">I am a Lead Full Stack Software Engineer based in Charleston, SC at Adapt Forward.
-                I specialize in Vuejs, Nuxt and typescript.  I also am a major advocate for Deno which is what hosts this website.</span>
+                I specialize in Vuejs, Nuxt and typescript.  I am a major advocate for Deno which is what hosts this website.</span>
+            <div class="mt-36 me-12">
+                <h1 class="text-2xl">Experience</h1>
+                <Experience />
+            </div>
         </div>
         <div>
             <ProjectTileDisplay :projects="projects"/>

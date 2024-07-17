@@ -7,7 +7,14 @@
                 <span v-for="language in languages" class="text-bold mt-4 underline me-4">{{ language }}</span>
             </div>
             <ULink v-if="props.link" :to="props.link" :external="true" class="text-bold mt-4 underline">{{ link }}</ULink>
-            <UIcon class="mt-2" name="i-simple-icons-github"/>
+            <UButton
+                :padded="false"
+                color="gray"
+                class="mt-2"
+                variant="link"
+                icon="i-simple-icons-github"
+                :to="props.github"
+            />
         </div>
     </UCard>
 </template>
