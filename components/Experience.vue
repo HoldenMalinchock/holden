@@ -1,6 +1,6 @@
 <template>
     <UCard>
-        <div class="mb-4" v-for="experience in experiences">
+        <div class="mb-4" v-for="experience,index in experiences">
             <span class="text-bold text-xl">{{ experience.company + " - " + experience.title }}</span>
             <ul>
                 <li class="indent-4 text-sm">{{ experience.location }}</li>
@@ -8,7 +8,7 @@
                 <li class="mb-2">{{ experience.description }}</li>
                 <li class="text-bold flex justify-end text-primary-300">{{ experience.technologies.join(", ") }}</li>
             </ul>
-            <UDivider class="my-4"/>
+            <UDivider v-if="index !== experiences.length - 1" class="my-4"/>
         </div>
     </UCard>
 </template>
