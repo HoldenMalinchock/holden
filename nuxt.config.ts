@@ -6,21 +6,21 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@pinia/nuxt",
     "@vueuse/nuxt",
-    "@nuxt/eslint"
+    "@nuxt/eslint",
   ],
   eslint: {
     config: {
       stylistic: {
         semi: false,
         quotes: "double",
-        indent: 2
-      }
-    }
+        indent: 2,
+      },
+    },
   },
   vue: {
-    propsDestructure: true
+    propsDestructure: true,
   },
   ui: {
-    icons: ['simple-icons']
-  }
+    icons: ["simple-icons"],
+  },
 })
