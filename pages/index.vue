@@ -56,6 +56,13 @@ const projects = [
     github: "https://github.com/HoldenMalinchock/feedback-management",
     link: "https://feedback-management-92e11.web.app",
   },
+  {
+    title: "Algorithm Visualizer",
+    description: "This is an application that lets you visualize algorithms.",
+    languages: ["Vuejs", "Nuxt", "Typescript"],
+    github: "https://github.com/HoldenMalinchock/algo",
+    link: "https://algo-visualizer.deno.dev",
+  },
 ]
 const myLinks = [
   {
