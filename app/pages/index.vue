@@ -193,10 +193,11 @@ const projects = [
   },
   {
     title: "Trading Calculator for ThetaGang.com",
-    description: "Compiles data from thetagang.com for analysis of stock trades.",
+    description: "Compiled data from thetagang.com for analysis of stock trades. Retired alongside the parent site.",
     languages: ["TypeScript", "Deno", "Fresh"],
     github: "https://github.com/HoldenMalinchock/thetagang-calc",
-    link: "https://theta-gang-calculator.deno.dev",
+    deprecated: true,
+    deprecationReason: "External URL changed, preventing API access.",
   },
   {
     title: "Algorithm Visualizer",

@@ -1,10 +1,32 @@
 <template>
-  <article class="card-glow rounded-2xl p-6 flex flex-col h-full group">
+  <article
+    class="card-glow rounded-2xl p-6 flex flex-col h-full group"
+    :class="deprecated && 'opacity-80 saturate-75'"
+  >
     <div class="flex items-start justify-between gap-3">
-      <h3 class="text-lg font-semibold text-zinc-100 leading-snug">
+      <h3
+        class="text-lg font-semibold leading-snug"
+        :class="deprecated ? 'text-zinc-300' : 'text-zinc-100'"
+      >
         {{ title }}
       </h3>
       <TradingPercent v-if="showTradingPercent" />
+      <UTooltip
+        v-if="deprecated"
+        :text="deprecationReason ?? 'No longer maintained.'"
+        :delay-duration="120"
+      >
+        <span
+          tabindex="0"
+          class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] font-mono rounded-md bg-zinc-800/80 border border-zinc-700/70 text-zinc-400 shrink-0 cursor-help focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/40"
+        >
+          <UIcon
+            name="i-lucide-archive"
+            class="size-3"
+          />
+          Deprecated
+        </span>
+      </UTooltip>
     </div>
 
     <p class="mt-3 text-sm text-zinc-400 leading-relaxed flex-1">
@@ -64,5 +86,7 @@ defineProps<{
   link?: string
   status?: string
   showTradingPercent?: boolean
+  deprecated?: boolean
+  deprecationReason?: string
 }>()
 </script>
