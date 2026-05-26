@@ -5,23 +5,32 @@
     <main class="mx-auto max-w-5xl px-6 sm:px-10 py-20 sm:py-32">
       <!-- Hero -->
       <section class="reveal">
-        <h1 class="text-5xl sm:text-7xl font-bold tracking-tight leading-[1.05]">
-          <span class="block text-zinc-100">Hi, I'm</span>
-          <span class="block gradient-text font-mono">Holden.</span>
+        <h1 class="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.1]">
+          <span class="block text-zinc-100">I build apps,</span>
+          <span class="block text-zinc-100">secure pipelines, and</span>
+          <span class="block gradient-text font-mono">the occasional dev tool.</span>
         </h1>
 
-        <p class="mt-8 max-w-2xl text-lg sm:text-xl text-zinc-300 leading-relaxed">
-          Senior Software Engineer at
-          <a
-            href="#"
-            class="text-rose-300 hover:text-rose-200 underline-offset-4 hover:underline transition"
-          >3 Reasons LLC</a>,
-          based in Charleston, SC. I build modern full-stack applications with
-          <span class="text-zinc-100 font-medium">Vue</span>,
-          <span class="text-zinc-100 font-medium">Nuxt</span>, and
-          <span class="text-zinc-100 font-medium">TypeScript</span> — and I'm a major advocate
-          for <span class="text-zinc-100 font-medium">Deno</span>, which hosts this site.
-        </p>
+        <div class="mt-10 font-mono text-sm sm:text-base text-zinc-400">
+          <div>
+            <span class="text-zinc-500">— </span>
+            <span class="text-zinc-200">Holden Malinchock</span>,
+            Senior SWE @
+            <a
+              href="#"
+              class="text-rose-300 hover:text-rose-200 underline-offset-4 hover:underline transition"
+            >3 Reasons LLC</a>
+          </div>
+          <div class="mt-1.5 text-zinc-500">
+            Charleston, SC
+            <span class="mx-1.5 text-zinc-700">·</span>
+            TypeScript
+            <span class="mx-1.5 text-zinc-700">·</span>
+            Nuxt
+            <span class="mx-1.5 text-zinc-700">·</span>
+            Deno
+          </div>
+        </div>
 
         <div class="mt-10 flex flex-wrap gap-3">
           <a
