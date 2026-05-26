@@ -31,7 +31,7 @@
 <script setup lang="ts">
 const asOf = "May 2026"
 
-const blurb = "Building secure pipelines and automation strategies at 3 Reasons LLC, shipping full-stack TypeScript and refining my auto-trading bot. Outside of work, learning more about market microstructure and re-reading the Pragmatic Programmer."
+const blurb = "Building secure pipelines and automation strategies at 3 Reasons LLC, shipping full-stack TypeScript and refining my auto-trading bot. Outside of work: deploying to the edge, learning more about market microstructure and re-reading the Pragmatic Programmer."
 
 const items = [
   { label: "Building", detail: "trading applications and utilies", icon: "i-lucide-hammer" },
