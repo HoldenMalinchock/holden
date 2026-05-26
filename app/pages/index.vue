@@ -213,7 +213,7 @@ const projects = [
     description: "An interactive sandbox for visualizing classic algorithms step-by-step. Great for refreshing fundamentals or teaching them.",
     languages: ["Vue", "Nuxt", "TypeScript"],
     github: "https://github.com/HoldenMalinchock/algo",
-    link: "https://algo-visualizer.deno.dev",
+    link: "https://algorithms.hmalinch.deno.net",
   },
 ]
 </script>
