@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-const asOf = "May 2026"
+const asOf = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })
 
 const blurb = "Building secure pipelines and automation strategies at 3 Reasons LLC, shipping full-stack TypeScript and refining my auto-trading bot. Outside of work: deploying to the edge, learning more about market microstructure and re-reading the Pragmatic Programmer."
 
