@@ -1,6 +1,7 @@
 <template>
   <div class="relative min-h-screen overflow-x-hidden">
     <AnimatedBackground />
+    <SideRails />
 
     <main class="mx-auto max-w-5xl px-6 sm:px-10 py-20 sm:py-32">
       <!-- Hero -->
@@ -186,6 +187,12 @@ const socialLinks = [
 
 const projects = [
   {
+    title: "Polymarket Insider Screener",
+    description: "Screens Polymarket for accounts likely trading on inside information. Ranks wallets on a weighted composite of weak signals — sub-topic concentration, alpha, stealth-band sizing, and a net-profitability gate — backed by on-chain funding forensics (multi-hop funder tracing) and Sybil-cluster detection across topics and the leaderboard.",
+    languages: ["TypeScript", "Nuxt", "Deno", "Polygon", "Deno Deploy"],
+    status: "In progress",
+  },
+  {
     title: "Trading Dashboard",
     description: "Live dashboard for my Auto Trader: portfolio value and all-time return up top, a full holdings table with cost basis and per-position P&L, and a running log of executed trades.",
     languages: ["TypeScript", "Nuxt", "Deno", "Deno Deploy"],
@@ -199,14 +206,6 @@ const projects = [
     github: "https://github.com/HoldenMalinchock/trades",
     status: "Live",
     showTradingPercent: true,
-  },
-  {
-    title: "Trading Calculator for ThetaGang.com",
-    description: "Compiled data from thetagang.com for analysis of stock trades. Retired alongside the parent site.",
-    languages: ["TypeScript", "Deno", "Fresh"],
-    github: "https://github.com/HoldenMalinchock/thetagang-calc",
-    deprecated: true,
-    deprecationReason: "External URL changed, preventing API access.",
   },
   {
     title: "Algorithm Visualizer",
