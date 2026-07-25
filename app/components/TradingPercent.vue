@@ -1,13 +1,10 @@
 <template>
   <span
     v-if="data"
-    class="inline-flex items-center gap-1.5 text-sm font-mono"
-    :class="isPositive ? 'text-emerald-400' : 'text-rose-400'"
+    class="t-pct"
+    :class="isPositive ? 'is-up' : 'is-down'"
   >
-    <UIcon
-      :name="isPositive ? 'i-lucide-trending-up' : 'i-lucide-trending-down'"
-      class="size-4"
-    />
+    <span class="t-pct__arrow">{{ isPositive ? "▲" : "▼" }}</span>
     {{ data.change }}%
   </span>
 </template>

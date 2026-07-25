@@ -1,48 +1,48 @@
 <template>
-  <div v-if="posts && posts.length">
-    <ul class="space-y-3">
+  <div class="term-block">
+    <div class="term-section-label">// blog · recent writing</div>
+
+    <div
+      v-if="pending"
+      class="t-dim"
+    >
+      fetching feed<span class="t-cursor-blink">…</span>
+    </div>
+
+    <ul
+      v-else-if="posts && posts.length"
+      class="term-list"
+    >
       <li
-        v-for="(post, index) in posts"
+        v-for="post in posts"
         :key="post.url"
-        class="reveal"
-        :style="{ transitionDelay: `${index * 80}ms` }"
       >
         <a
           :href="post.url"
           target="_blank"
           rel="noopener"
-          class="card-glow group flex items-center justify-between gap-4 rounded-2xl px-5 py-4"
+          class="term-list__row"
         >
-          <div class="min-w-0">
-            <h3 class="text-base sm:text-lg font-semibold text-zinc-100 group-hover:text-rose-200 transition-colors">
-              {{ post.title }}
-            </h3>
-            <p
-              v-if="post.published"
-              class="mt-1 text-xs font-mono text-zinc-500"
-            >
-              {{ formatDate(post.published) }}
-            </p>
-          </div>
-          <UIcon
-            name="i-lucide-arrow-up-right"
-            class="size-5 text-zinc-500 group-hover:text-rose-300 transition-colors shrink-0"
-          />
+          <span class="term-list__title">{{ post.title }}</span>
+          <span class="term-list__meta">{{ formatDate(post.published) }}</span>
         </a>
       </li>
     </ul>
 
-    <div class="reveal mt-6">
-      <UButton
-        to="https://holden-blog.hmalinch.deno.net"
+    <div
+      v-else
+      class="t-dim"
+    >
+      no posts loaded — visit the blog directly.
+    </div>
+
+    <div class="term-actions">
+      <a
+        :href="blogBase"
         target="_blank"
-        external
-        color="neutral"
-        variant="ghost"
-        size="sm"
-        trailing-icon="i-lucide-arrow-right"
-        label="Read all posts"
-      />
+        rel="noopener"
+        class="term-link term-link--accent"
+      >↗ read all posts</a>
     </div>
   </div>
 </template>
@@ -56,7 +56,7 @@ interface Post {
 
 const blogBase = "https://holden-blog.hmalinch.deno.net"
 
-const { data: posts } = await useAsyncData<Post[]>("blog-feed", async () => {
+const { data: posts, pending } = await useAsyncData<Post[]>("blog-feed", async () => {
   try {
     const text = await $fetch<string>(`${blogBase}/feed`, { responseType: "text" })
     const entries = [...text.matchAll(/<entry>([\s\S]*?)<\/entry>/g)]
@@ -71,7 +71,7 @@ const { data: posts } = await useAsyncData<Post[]>("blog-feed", async () => {
       return { title, url, published }
     })
     parsed.sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime())
-    return parsed.slice(0, 3)
+    return parsed.slice(0, 5)
   }
   catch {
     return []
@@ -81,6 +81,6 @@ const { data: posts } = await useAsyncData<Post[]>("blog-feed", async () => {
 function formatDate(iso: string) {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return iso
-  return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
 }
 </script>
