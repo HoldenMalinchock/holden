@@ -33,7 +33,7 @@ export interface Hobby {
 export interface Skill {
   name: string
   ext: string
-  category: "lang" | "frontend" | "backend" | "data" | "infra"
+  category: "lang" | "frontend" | "backend" | "data" | "infra" | "agents"
   size: string
   mtime: string
   note: string
@@ -55,13 +55,15 @@ export function usePortfolio() {
   ]
 
   const nowBlurb =
-    "Building secure pipelines and automation strategies at 3 Reasons LLC, shipping full-stack TypeScript and refining my auto-trading bot. Outside of work: deploying to the edge, learning more about market microstructure and re-reading the Pragmatic Programmer."
+    "Senior full-stack at 3 Reasons LLC — secure pipelines, TypeScript apps, and technical direction. After hours: agent harnesses for multi-step coding work, a Polymarket screener, and an auto-trader I actually run in production. I treat models as fast juniors: plan, constrain, verify, ship."
 
   const nowItems = [
-    { label: "Building", detail: "trading applications and utilities" },
-    { label: "Working with", detail: "TypeScript, Nuxt 4, Deno Deploy" },
-    { label: "Learning", detail: "agent orchestration and MCP servers" },
-    { label: "Based in", detail: "Charleston, SC" },
+    { label: "Role", detail: "Senior SWE @ 3 Reasons LLC · Charleston, SC" },
+    { label: "Shipping", detail: "full-stack TS · DevSecOps pipelines · edge deploys" },
+    { label: "Agents", detail: "coding agents + MCP — orchestration with human review" },
+    { label: "Side work", detail: "Polymarket screener · Alpaca auto-trader · trading dashboard" },
+    { label: "Reading", detail: "market microstructure · Pragmatic Programmer (again)" },
+    { label: "Open to", detail: "senior full-stack / platform roles · strong TS + systems shops" },
   ]
 
   const experiences: Experience[] = [
@@ -108,6 +110,8 @@ export function usePortfolio() {
   ]
 
   const skills: Skill[] = [
+    { name: "hermes", ext: "agent", category: "agents", size: "42K", mtime: "Jul 24 22:10", note: "coding agent harness day-to-day" },
+    { name: "mcp", ext: "json", category: "agents", size: "21K", mtime: "Jul 24 18:40", note: "tool servers · orchestration" },
     { name: "typescript", ext: "ts", category: "lang", size: "48K", mtime: "Jul 20 09:14", note: "default language" },
     { name: "nuxt", ext: "mjs", category: "frontend", size: "36K", mtime: "Jul 18 16:02", note: "app shell of choice" },
     { name: "vue", ext: "vue", category: "frontend", size: "34K", mtime: "Jul 18 15:41", note: "UI composition" },
@@ -131,6 +135,8 @@ export function usePortfolio() {
     "Docker",
     "Tailwind",
     "Elasticsearch",
+    "Hermes",
+    "MCP",
   ]
 
   const projects: Project[] = [
