@@ -4,11 +4,13 @@
       // whoami
     </div>
 
-    <!-- ASCII name — primary brand mark -->
-    <pre
-      class="whoami-ascii m-0 overflow-x-auto text-primary"
-      aria-label="Holden Malinchock"
-    >{{ asciiName }}</pre>
+    <!-- ASCII name — primary brand mark with outer fade -->
+    <div class="whoami-ascii-wrap">
+      <pre
+        class="whoami-ascii m-0 text-primary"
+        aria-label="Holden Malinchock"
+      >{{ asciiName }}</pre>
+    </div>
 
     <div class="mt-5 space-y-3 sm:mt-8 sm:space-y-4">
       <div class="text-base text-muted sm:text-lg md:text-xl">
