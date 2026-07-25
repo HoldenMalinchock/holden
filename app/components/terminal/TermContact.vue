@@ -5,7 +5,7 @@
     <UCard
       variant="subtle"
       :ui="{
-        root: 'term-u-card bg-white/2 ring-white/10',
+        root: 'bg-elevated/40 ring-default',
         body: 'sm:p-6',
         header: 'sm:px-6 sm:pt-5 sm:pb-0',
         footer: 'sm:px-6 sm:pb-5 sm:pt-0',
@@ -14,23 +14,23 @@
       <template #header>
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h2 class="text-base sm:text-lg font-semibold text-white tracking-tight">
+            <h2 class="text-base sm:text-lg font-semibold text-highlighted tracking-tight">
               Have a problem worth solving?
             </h2>
-            <p class="mt-1 text-sm text-white/55">
+            <p class="mt-1 text-sm text-muted">
               Full-stack · trading systems · Deno/Nuxt · whatever you're shipping
             </p>
           </div>
           <UBadge
-            color="neutral"
-            variant="outline"
+            color="primary"
+            variant="subtle"
             size="sm"
             label="open channel"
           />
         </div>
       </template>
 
-      <p class="text-sm text-white/65 leading-relaxed max-w-2xl">
+      <p class="text-sm text-toned leading-relaxed max-w-2xl">
         Always happy to chat about full-stack work, trading systems, Deno/Nuxt,
         or whatever it is you're shipping. Email is fastest.
       </p>
@@ -40,7 +40,7 @@
           <UButton
             :to="`mailto:${p.email}`"
             external
-            color="neutral"
+            color="primary"
             variant="solid"
             size="md"
             icon="i-lucide-mail"

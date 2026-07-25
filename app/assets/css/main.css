@@ -1,21 +1,6 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-/*
- * Solid black/white primary — Nuxt UI docs:
- * you can't set primary: 'black' in app.config (no shade scale).
- * https://ui.nuxt.com/docs/getting-started/theme/css-variables
- */
-:root {
-  --ui-primary: black;
-}
-
-.dark,
-:root {
-  /* Always-dark terminal: primary reads as white for contrast */
-  --ui-primary: white;
-}
-
 :root {
   color-scheme: dark;
   --term-bg: #0a0a0a;
@@ -26,16 +11,16 @@
   --term-text: #e8e8e8;
   --term-dim: #6e6e6e;
   --term-muted: #9a9a9a;
-  /* Monochrome accents driven by Nuxt UI primary (white on dark) */
-  --term-accent: var(--ui-primary, #ffffff);
-  --term-accent-2: rgba(255, 255, 255, 0.72);
+  /* Indigo primary — follows Nuxt UI --ui-primary from app.config */
+  --term-accent: var(--ui-primary, #818cf8);
+  --term-accent-2: color-mix(in oklab, var(--ui-primary, #818cf8) 70%, white);
   --term-warn: #ffd60a;
   --term-err: #ff453a;
-  --term-user: var(--ui-primary, #ffffff);
-  --term-host: rgba(255, 255, 255, 0.72);
-  --term-path: rgba(255, 255, 255, 0.55);
+  --term-user: var(--ui-primary, #818cf8);
+  --term-host: color-mix(in oklab, var(--ui-primary, #818cf8) 75%, white);
+  --term-path: color-mix(in oklab, var(--ui-primary, #818cf8) 55%, white);
   --term-prompt: #e8e8e8;
-  --term-selection: rgba(255, 255, 255, 0.16);
+  --term-selection: color-mix(in oklab, var(--ui-primary, #818cf8) 28%, transparent);
   --term-mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "JetBrains Mono",
     ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
 }
@@ -129,19 +114,21 @@ a:hover {
   overflow: hidden;
 }
 
-/* buzz.xyz-style dotted grid + soft depth */
-.term-app::before {
+/* Dot grid lives on the full app + again on main so panels don't hide it */
+.term-app::before,
+.term-main::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image:
-    radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
-  background-size: 22px 22px;
-  background-position: 0 0;
-  mask-image: radial-gradient(ellipse 85% 70% at 50% 40%, #000 20%, transparent 75%);
-  opacity: 0.55;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1.2px);
+  background-size: 20px 20px;
+  background-position: 10px 10px;
+}
+
+.term-app::before {
+  opacity: 0.7;
 }
 
 .term-app::after {
@@ -151,9 +138,9 @@ a:hover {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(900px 480px at 18% 0%, rgba(255, 255, 255, 0.045), transparent 60%),
-    radial-gradient(700px 420px at 90% 100%, rgba(255, 255, 255, 0.03), transparent 55%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.15), transparent 30%, rgba(0, 0, 0, 0.35));
+    radial-gradient(900px 480px at 18% 0%, color-mix(in oklab, var(--ui-primary, #818cf8) 12%, transparent), transparent 60%),
+    radial-gradient(700px 420px at 90% 100%, color-mix(in oklab, var(--ui-primary, #818cf8) 8%, transparent), transparent 55%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.1), transparent 28%, rgba(0, 0, 0, 0.28));
 }
 
 .term-shell {
@@ -166,13 +153,24 @@ a:hover {
 }
 
 .term-main {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
   min-height: 0;
   border-left: 1px solid var(--term-border);
-  background: rgba(10, 10, 10, 0.55);
-  backdrop-filter: blur(2px);
+  background: rgba(10, 10, 10, 0.35);
+}
+
+.term-main::before {
+  opacity: 0.85;
+  z-index: 0;
+}
+
+.term-stream,
+.term-input {
+  position: relative;
+  z-index: 1;
 }
 
 /* ── sidebar (reference only — not clickable) ───────── */
@@ -180,8 +178,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  background: rgba(8, 8, 8, 0.72);
-  backdrop-filter: blur(2px);
+  background: rgba(8, 8, 8, 0.55);
   padding: 1rem 0.55rem;
   user-select: none;
 }
@@ -235,8 +232,8 @@ a:hover {
 }
 
 .term-tool.is-active {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.22);
+  background: color-mix(in oklab, var(--ui-primary, #818cf8) 14%, transparent);
+  border-color: color-mix(in oklab, var(--ui-primary, #818cf8) 40%, transparent);
 }
 
 .term-tool.is-active .term-tool__cmd {
@@ -347,115 +344,107 @@ a:hover {
   margin-top: 0.75rem;
   font-size: 12px;
 }
-/* ── experience timeline ────────────────────────────── */
-.exp {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  max-width: 52rem;
-}
-
-.exp-list {
+/* ── experience timeline (pre equal-width shift) ─────── */
+.term-timeline {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 0.85rem;
-  min-width: 0;
 }
 
-/* Contract pair + right brace share one row grid */
-.exp-contract {
+.term-timeline__item {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 1.5rem;
-  column-gap: 0.85rem;
-  align-items: stretch;
-  min-width: 0;
+  grid-template-columns: 3.25rem 1fr;
+  gap: 0.75rem;
 }
 
-.exp-row {
-  display: grid;
-  grid-template-columns: 3.25rem minmax(0, 1fr);
-  column-gap: 0.75rem;
-  align-items: start;
-  min-width: 0;
-}
-
-/* Later roles reserve the same right column so card width matches */
-.exp-row--rest {
-  grid-template-columns: 3.25rem minmax(0, 1fr) 1.5rem;
-  column-gap: 0.85rem;
-}
-
-.exp-brace-spacer {
-  width: 1.5rem;
-}
-
-.exp-gutter {
+.term-timeline__gutter {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 0.15rem;
 }
 
-.exp-year {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.75rem;
+.term-timeline__year {
   font-size: 11px;
-  line-height: 1;
   color: var(--term-dim);
   border: 1px solid var(--term-border);
   border-radius: 4px;
-  padding: 0.28rem 0.3rem;
-  background: rgba(0, 0, 0, 0.35);
+  padding: 0.15rem 0.3rem;
+  background: rgba(255, 255, 255, 0.02);
   z-index: 1;
 }
 
-.exp-year.is-current {
+.term-timeline__year.is-current {
   color: var(--term-accent);
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: color-mix(in oklab, var(--ui-primary, #818cf8) 45%, transparent);
 }
 
-.exp-spine {
+.term-timeline__rail {
   flex: 1;
   width: 1px;
-  min-height: 1.5rem;
   margin-top: 0.35rem;
-  background: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent);
+  min-height: 1.25rem;
 }
 
-.exp-card {
-  min-width: 0;
-}
-
-/* Simple C-brace on the right — no absolute overflow tricks */
-.exp-brace {
+/* Right-side brace: same client contract across vendor companies */
+.term-timeline__contract {
   position: relative;
-  align-self: stretch;
-  margin: 0.85rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-left: 0;
-  border-radius: 0 6px 6px 0;
-  min-height: 4rem;
+  display: grid;
+  gap: 0.85rem;
+  padding-right: 1.75rem;
+  list-style: none;
 }
 
-.exp-brace__label {
+.term-timeline__contract-rail {
+  position: absolute;
+  top: 1.1rem;
+  bottom: 1.1rem;
+  right: 0.15rem;
+  width: 1.15rem;
+  pointer-events: none;
+}
+
+.term-timeline__contract-line {
+  position: absolute;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  right: 0;
+  width: 1px;
+  background: color-mix(in oklab, var(--ui-primary, #818cf8) 55%, transparent);
+}
+
+.term-timeline__contract-cap {
+  position: absolute;
+  right: 0;
+  width: 10px;
+  height: 1px;
+  background: color-mix(in oklab, var(--ui-primary, #818cf8) 55%, transparent);
+}
+
+.term-timeline__contract-cap.is-top {
+  top: 0.35rem;
+}
+
+.term-timeline__contract-cap.is-bottom {
+  bottom: 0.35rem;
+}
+
+.term-timeline__contract-label {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  writing-mode: vertical-rl;
-  rotate: 180deg;
+  right: -0.15rem;
+  transform: translate(50%, -50%) rotate(90deg);
+  transform-origin: center;
+  white-space: nowrap;
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: color-mix(in oklab, var(--ui-primary, #818cf8) 80%, white);
   background: var(--term-bg);
-  padding: 0.35rem 0;
-  white-space: nowrap;
+  padding: 0 0.35rem;
 }
 
 .term-card {
@@ -508,10 +497,10 @@ a:hover {
   display: inline-flex;
   align-items: center;
   padding: 0.12rem 0.45rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid color-mix(in oklab, var(--ui-primary, #818cf8) 30%, transparent);
   border-radius: 4px;
-  color: rgba(255, 255, 255, 0.82);
-  background: rgba(255, 255, 255, 0.04);
+  color: var(--term-accent);
+  background: color-mix(in oklab, var(--ui-primary, #818cf8) 12%, transparent);
   font-size: 11px;
 }
 
@@ -574,11 +563,11 @@ a:hover {
 }
 .term-link--accent {
   color: var(--term-accent);
-  border-bottom-color: rgba(255, 255, 255, 0.28);
+  border-bottom-color: color-mix(in oklab, var(--ui-primary, #818cf8) 40%, transparent);
 }
 .term-link--accent:hover {
-  color: #ffffff;
-  border-bottom-color: #ffffff;
+  color: color-mix(in oklab, var(--ui-primary, #818cf8) 75%, white);
+  border-bottom-color: color-mix(in oklab, var(--ui-primary, #818cf8) 75%, white);
 }
 
 .term-list {
@@ -602,8 +591,8 @@ a:hover {
   background: rgba(255, 255, 255, 0.015);
 }
 .term-list__row:hover {
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: color-mix(in oklab, var(--ui-primary, #818cf8) 35%, transparent);
+  background: color-mix(in oklab, var(--ui-primary, #818cf8) 10%, transparent);
 }
 .term-list__title {
   color: #f0f0f0;
@@ -660,8 +649,7 @@ a:hover {
 
 .term-input {
   border-top: 1px solid var(--term-border);
-  background: rgba(7, 7, 7, 0.82);
-  backdrop-filter: blur(4px);
+  background: rgba(7, 7, 7, 0.72);
   padding: 0.85rem 1.35rem 0.9rem;
 }
 
@@ -752,24 +740,15 @@ a:hover {
     display: none;
   }
 
-  .exp-row {
-    grid-template-columns: 2.75rem minmax(0, 1fr);
+  .term-timeline__item {
+    grid-template-columns: 2.75rem 1fr;
   }
 
-  .exp-row--rest {
-    grid-template-columns: 2.75rem minmax(0, 1fr) 1.25rem;
+  .term-timeline__contract {
+    padding-right: 1.35rem;
   }
 
-  .exp-contract {
-    grid-template-columns: minmax(0, 1fr) 1.25rem;
-    column-gap: 0.65rem;
-  }
-
-  .exp-brace-spacer {
-    width: 1.25rem;
-  }
-
-  .exp-brace__label {
+  .term-timeline__contract-label {
     font-size: 9px;
     letter-spacing: 0.1em;
   }
