@@ -86,8 +86,8 @@ a:hover {
 .t-accent { color: var(--term-accent); }
 .t-warn { color: var(--term-warn); }
 .t-err { color: var(--term-err); }
-.t-user { color: var(--term-user); font-weight: 600; }
-.t-host { color: var(--term-host); }
+.t-user { color: var(--term-text); font-weight: 500; }
+.t-host { color: var(--term-accent); }
 .t-path { color: var(--term-path); }
 .t-prompt-char { color: var(--term-prompt); }
 .t-sep { margin: 0 0.45rem; color: var(--term-dim); }
@@ -114,7 +114,7 @@ a:hover {
   overflow: hidden;
 }
 
-/* Dot grid lives on the full app + again on main so panels don't hide it */
+/* Dot grid — subtle depth, no color blobs */
 .term-app::before,
 .term-main::before {
   content: "";
@@ -122,25 +122,18 @@ a:hover {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1.2px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1.2px);
   background-size: 20px 20px;
   background-position: 10px 10px;
 }
 
 .term-app::before {
-  opacity: 0.7;
+  opacity: 0.4;
 }
 
-.term-app::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+.term-main::before {
+  opacity: 0.5;
   z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(900px 480px at 18% 0%, color-mix(in oklab, var(--ui-primary, #818cf8) 12%, transparent), transparent 60%),
-    radial-gradient(700px 420px at 90% 100%, color-mix(in oklab, var(--ui-primary, #818cf8) 8%, transparent), transparent 55%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.1), transparent 28%, rgba(0, 0, 0, 0.28));
 }
 
 .term-shell {
@@ -160,11 +153,6 @@ a:hover {
   min-height: 0;
   border-left: 1px solid var(--term-border);
   background: rgba(10, 10, 10, 0.35);
-}
-
-.term-main::before {
-  opacity: 0.85;
-  z-index: 0;
 }
 
 .term-stream,
