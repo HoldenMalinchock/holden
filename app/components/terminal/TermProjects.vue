@@ -17,9 +17,7 @@
             <span
               v-if="project.status"
               class="t-warn"
-            >
-              <span class="t-dot" />{{ project.status }}
-            </span>
+            >{{ project.status }}</span>
           </div>
         </div>
         <p class="term-prose">{{ project.description }}</p>

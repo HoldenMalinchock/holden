@@ -168,7 +168,7 @@ export function usePortfolio() {
     { name: "/whoami", summary: "bio + role", aliases: ["whoami", "about", "me"] },
     { name: "/now", summary: "what I'm focused on", aliases: ["now", "status"] },
     { name: "/experience", summary: "work history", aliases: ["experience", "work", "jobs", "cv"] },
-    { name: "/stack", summary: "tools I reach for", aliases: ["stack", "tech", "skills"] },
+    { name: "/skills", summary: "tools I reach for", aliases: ["skills", "stack", "tech"] },
     { name: "/projects", summary: "things I've shipped", aliases: ["projects", "work-samples", "builds"] },
     { name: "/blog", summary: "recent writing", aliases: ["blog", "writing", "posts"] },
     { name: "/hobbies", summary: "off-keyboard life", aliases: ["hobbies", "life", "fun"] },

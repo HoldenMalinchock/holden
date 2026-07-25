@@ -3,7 +3,6 @@
     <div class="term-section-label">
       // now
       <span class="t-dim">— {{ asOf }}</span>
-      <span class="t-live">live</span>
     </div>
     <p class="term-prose">{{ p.nowBlurb }}</p>
     <div class="term-kv term-kv--grid">

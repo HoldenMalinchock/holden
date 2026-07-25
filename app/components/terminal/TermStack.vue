@@ -1,6 +1,6 @@
 <template>
   <div class="term-block">
-    <div class="term-section-label">// stack · day-to-day tools</div>
+    <div class="term-section-label">// skills · day-to-day tools</div>
     <div class="term-stack">
       <div
         v-for="(tech, i) in p.stack"

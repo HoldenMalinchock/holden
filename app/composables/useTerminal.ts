@@ -1,6 +1,4 @@
 export type TerminalBlock =
-  | { kind: "boot" }
-  | { kind: "prompt"; input: string }
   | { kind: "text"; lines: string[]; tone?: "dim" | "ok" | "warn" | "err" | "accent" }
   | { kind: "whoami" }
   | { kind: "now" }
@@ -14,9 +12,10 @@ export type TerminalBlock =
   | { kind: "help" }
   | { kind: "ls" }
 
-export interface TerminalEntry {
+export interface TerminalView {
   id: string
-  block: TerminalBlock
+  command: string | null
+  block: TerminalBlock | null
 }
 
 function uid() {
@@ -29,7 +28,7 @@ function normalize(raw: string) {
 
 export function useTerminal() {
   const portfolio = usePortfolio()
-  const entries = ref<TerminalEntry[]>([])
+  const view = ref<TerminalView>({ id: uid(), command: null, block: null })
   const history = ref<string[]>([])
   const historyIndex = ref(-1)
   const running = ref(false)
@@ -44,8 +43,9 @@ export function useTerminal() {
       })),
   )
 
-  function push(block: TerminalBlock) {
-    entries.value.push({ id: uid(), block })
+  function setView(command: string | null, block: TerminalBlock | null) {
+    view.value = { id: uid(), command, block }
+    activeCommand.value = command
   }
 
   function resolveCommand(input: string): string | null {
@@ -65,68 +65,31 @@ export function useTerminal() {
     return null
   }
 
-  function runResolved(cmd: string) {
-    activeCommand.value = cmd
+  function blockFor(cmd: string): TerminalBlock | null {
     switch (cmd) {
-      case "/whoami":
-        push({ kind: "whoami" })
-        break
-      case "/now":
-        push({ kind: "now" })
-        break
-      case "/experience":
-        push({ kind: "experience" })
-        break
-      case "/stack":
-        push({ kind: "stack" })
-        break
-      case "/projects":
-        push({ kind: "projects" })
-        break
-      case "/blog":
-        push({ kind: "blog" })
-        break
-      case "/hobbies":
-        push({ kind: "hobbies" })
-        break
-      case "/contact":
-        push({ kind: "contact" })
-        break
-      case "/social":
-        push({ kind: "social" })
-        break
-      case "/help":
-        push({ kind: "help" })
-        break
-      case "/ls":
-        push({ kind: "ls" })
-        break
-      case "/clear":
-        entries.value = []
-        activeCommand.value = null
-        push({
-          kind: "text",
-          tone: "dim",
-          lines: ["screen cleared. type /help or pick a tool."],
-        })
-        break
-      default:
-        push({
-          kind: "text",
-          tone: "err",
-          lines: [`command not found: ${cmd}`, "try /help"],
-        })
+      case "/whoami": return { kind: "whoami" }
+      case "/now": return { kind: "now" }
+      case "/experience": return { kind: "experience" }
+      case "/skills": return { kind: "stack" }
+      case "/projects": return { kind: "projects" }
+      case "/blog": return { kind: "blog" }
+      case "/hobbies": return { kind: "hobbies" }
+      case "/contact": return { kind: "contact" }
+      case "/social": return { kind: "social" }
+      case "/help": return { kind: "help" }
+      case "/ls": return { kind: "ls" }
+      case "/clear": return null
+      default: return null
     }
   }
 
-  async function execute(raw: string, opts: { echo?: boolean } = {}) {
+  async function execute(raw: string, opts: { recordHistory?: boolean } = {}) {
     const input = normalize(raw)
     if (!input || running.value) return
 
     running.value = true
     try {
-      if (opts.echo !== false) {
-        push({ kind: "prompt", input })
+      if (opts.recordHistory !== false) {
         history.value.unshift(input)
         if (history.value.length > 50) history.value.pop()
         historyIndex.value = -1
@@ -134,22 +97,31 @@ export function useTerminal() {
 
       const cmd = resolveCommand(input)
       if (!cmd) {
-        push({
+        setView(null, {
           kind: "text",
           tone: "err",
           lines: [
             `zsh: command not found: ${input.split(" ")[0]}`,
-            "type /help for available tools",
+            "type /help for available commands",
           ],
         })
         return
       }
 
-      // Tiny delay so it feels like a TUI tool dispatch
-      await new Promise(r => setTimeout(r, 40))
-      runResolved(cmd)
+      if (cmd === "/clear") {
+        setView(null, null)
+        if (import.meta.client) {
+          const url = new URL(window.location.href)
+          url.hash = ""
+          history.replaceState(null, "", url)
+        }
+        return
+      }
 
-      if (import.meta.client && cmd !== "/clear") {
+      // Replace previous output entirely — only the new command remains.
+      setView(cmd, blockFor(cmd))
+
+      if (import.meta.client) {
         const slug = cmd.replace(/^\//, "")
         const url = new URL(window.location.href)
         url.hash = slug
@@ -169,7 +141,6 @@ export function useTerminal() {
       .map(c => c.name)
       .filter(name => name.startsWith(needle))
     if (hits.length === 1) return hits[0] ?? null
-    // also match aliases
     for (const cmd of portfolio.commands) {
       for (const a of cmd.aliases) {
         const full = `/${a}`
@@ -198,33 +169,21 @@ export function useTerminal() {
   }
 
   async function boot() {
-    entries.value = []
-    push({ kind: "boot" })
-    await new Promise(r => setTimeout(r, 120))
-    push({ kind: "whoami" })
-    push({
-      kind: "text",
-      tone: "dim",
-      lines: [
-        "session ready. tools on the left · slash commands below.",
-        "try /experience  /projects  /hobbies  ·  /help for all",
-      ],
-    })
-    activeCommand.value = "/whoami"
-
     if (import.meta.client) {
       const hash = window.location.hash.replace(/^#/, "").trim()
       if (hash) {
         const cmd = resolveCommand(hash.startsWith("/") ? hash : `/${hash}`)
-        if (cmd && cmd !== "/whoami") {
-          await execute(cmd, { echo: true })
+        if (cmd && cmd !== "/clear") {
+          await execute(cmd, { recordHistory: false })
+          return
         }
       }
     }
+    setView("/whoami", { kind: "whoami" })
   }
 
   return {
-    entries,
+    view,
     tools,
     running,
     activeCommand,
