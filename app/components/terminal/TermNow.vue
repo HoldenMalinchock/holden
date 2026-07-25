@@ -41,7 +41,7 @@
       <span class="text-dimmed"> cat ~/priorities</span>
       <div class="mt-1.5 space-y-1 text-muted">
         <div>1. ship reliable full-stack systems at work</div>
-        <div>2. use agents as force multipliers — never skip verification</div>
+        <div>2. build agentic workflows & harnesses for everyday dev</div>
         <div>3. keep side systems live (trader, screener, dashboard)</div>
       </div>
     </div>

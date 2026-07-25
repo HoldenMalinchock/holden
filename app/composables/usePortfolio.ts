@@ -55,15 +55,13 @@ export function usePortfolio() {
   ]
 
   const nowBlurb =
-    "Senior full-stack at 3 Reasons LLC — secure pipelines, TypeScript apps, and technical direction. After hours: agent harnesses for multi-step coding work, a Polymarket screener, and an auto-trader I actually run in production. I treat models as fast juniors: plan, constrain, verify, ship."
+    "Senior full-stack at 3 Reasons LLC — secure pipelines, TypeScript apps, and technical direction. Outside work I'm deep in agentic workflows and coding harnesses for everyday development, plus a Polymarket screener and an auto-trader I run in production."
 
   const nowItems = [
     { label: "Role", detail: "Senior SWE @ 3 Reasons LLC · Charleston, SC" },
     { label: "Shipping", detail: "full-stack TS · DevSecOps pipelines · edge deploys" },
-    { label: "Agents", detail: "coding agents + MCP — orchestration with human review" },
+    { label: "Agents", detail: "agentic workflows + harnesses for day-to-day coding" },
     { label: "Side work", detail: "Polymarket screener · Alpaca auto-trader · trading dashboard" },
-    { label: "Reading", detail: "market microstructure · Pragmatic Programmer (again)" },
-    { label: "Open to", detail: "senior full-stack / platform roles · strong TS + systems shops" },
   ]
 
   const experiences: Experience[] = [
