@@ -36,7 +36,7 @@
           </div>
           <UCard
             variant="subtle"
-            :ui="{ root: 'bg-elevated/30 ring-default', body: 'sm:p-4' }"
+            :ui="{ root: 'bg-black/55 ring-white/10', body: 'sm:p-4' }"
           >
             <div class="flex flex-wrap items-baseline justify-between gap-2">
               <div>
@@ -89,7 +89,7 @@
         </div>
         <UCard
           variant="subtle"
-          :ui="{ root: 'bg-elevated/30 ring-default', body: 'sm:p-4' }"
+          :ui="{ root: 'bg-black/55 ring-white/10', body: 'sm:p-4' }"
         >
           <div class="flex flex-wrap items-baseline justify-between gap-2">
             <div>

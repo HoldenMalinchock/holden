@@ -70,7 +70,7 @@
           <div
             v-if="view.block"
             :key="view.id"
-            class="term-pop w-full max-w-5xl"
+            class="term-pop w-full max-w-6xl"
           >
             <TerminalTermWhoami v-if="view.block.kind === 'whoami'" />
             <TerminalTermNow v-else-if="view.block.kind === 'now'" />
