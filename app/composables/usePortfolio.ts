@@ -30,6 +30,15 @@ export interface Hobby {
   tag: string
 }
 
+export interface Skill {
+  name: string
+  ext: string
+  category: "lang" | "frontend" | "backend" | "data" | "infra"
+  size: string
+  mtime: string
+  note: string
+}
+
 export function usePortfolio() {
   const name = "Holden Malinchock"
   const role = "Senior Full Stack Software Engineer"
@@ -96,6 +105,19 @@ export function usePortfolio() {
         "Operations engineering: upgraded and maintained a mid-scale Python application from Python 2 to 3, and designed and built an automated firewall rule system.",
       technologies: ["Python", "Flask", "Jenkins", "Groovy"],
     },
+  ]
+
+  const skills: Skill[] = [
+    { name: "typescript", ext: "ts", category: "lang", size: "48K", mtime: "Jul 20 09:14", note: "default language" },
+    { name: "nuxt", ext: "mjs", category: "frontend", size: "36K", mtime: "Jul 18 16:02", note: "app shell of choice" },
+    { name: "vue", ext: "vue", category: "frontend", size: "34K", mtime: "Jul 18 15:41", note: "UI composition" },
+    { name: "deno", ext: "ts", category: "backend", size: "28K", mtime: "Jul 12 11:20", note: "edge + scripts" },
+    { name: "python", ext: "py", category: "lang", size: "31K", mtime: "Jul  9 08:55", note: "services + ops" },
+    { name: "tailwind", ext: "css", category: "frontend", size: "18K", mtime: "Jul  7 19:33", note: "utility styling" },
+    { name: "node", ext: "js", category: "backend", size: "24K", mtime: "Jun 28 13:10", note: "tooling + APIs" },
+    { name: "postgres", ext: "sql", category: "data", size: "22K", mtime: "Jun 21 10:44", note: "relational core" },
+    { name: "elasticsearch", ext: "json", category: "data", size: "27K", mtime: "Jun 14 17:05", note: "search + analytics" },
+    { name: "docker", ext: "yml", category: "infra", size: "16K", mtime: "May 30 12:18", note: "containers" },
   ]
 
   const stack = [
@@ -190,6 +212,7 @@ export function usePortfolio() {
     nowBlurb,
     nowItems,
     experiences,
+    skills,
     stack,
     projects,
     hobbies,

@@ -276,6 +276,11 @@ a:hover {
   max-width: 72rem;
 }
 
+.term-block--wide {
+  max-width: none;
+  width: 100%;
+}
+
 .term-section-label {
   color: var(--term-dim);
   font-size: 12px;
@@ -506,6 +511,93 @@ a:hover {
   border: 1px solid var(--term-border);
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.015);
+}
+
+/* ls -lta skills listing */
+.skills-ls {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--term-border);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.28);
+  font-family: var(--term-mono);
+  font-size: clamp(12px, 1.35vw, 13.5px);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.skills-ls__meta {
+  margin-bottom: 0.35rem;
+}
+
+.skills-ls__row {
+  display: grid;
+  grid-template-columns:
+    9.5ch
+    1.5ch
+    7ch
+    9ch
+    5ch
+    12ch
+    minmax(12ch, max-content)
+    minmax(10ch, 1fr);
+  column-gap: 1ch;
+  align-items: baseline;
+  padding: 0.1rem 0.15rem;
+  border-radius: 4px;
+}
+
+.skills-ls__row:hover {
+  background: color-mix(in oklab, var(--ui-primary, #818cf8) 10%, transparent);
+}
+
+.skills-ls__mode,
+.skills-ls__nlink,
+.skills-ls__owner,
+.skills-ls__group,
+.skills-ls__size,
+.skills-ls__mtime {
+  font-variant-numeric: tabular-nums;
+}
+
+.skills-ls__size {
+  text-align: right;
+}
+
+.skills-ls__name {
+  font-weight: 500;
+}
+
+.skills-ls__note {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.skills-legend {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px dashed var(--term-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.skills-legend__title {
+  font-size: 12px;
+  margin-bottom: 0.45rem;
+}
+
+.skills-legend__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.35rem 1rem;
+  font-size: 12.5px;
+}
+
+.skills-legend__item {
+  display: flex;
+  gap: 0.65rem;
+  align-items: baseline;
 }
 
 .term-projects,
