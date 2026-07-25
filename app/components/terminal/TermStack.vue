@@ -1,46 +1,60 @@
 <template>
-  <div class="term-block term-block--wide">
-    <div class="term-section-label">// skills · ls -lta ~/skills</div>
+  <div class="w-full">
+    <div class="mb-2.5 text-xs tracking-wide text-dimmed">
+      // skills · ls -lta ~/skills
+    </div>
 
-    <div class="skills-ls" aria-label="Skills directory listing">
-      <div class="skills-ls__meta t-dim">total {{ p.skills.length }}</div>
+    <UCard
+      variant="subtle"
+      :ui="{ root: 'bg-black/30 ring-default overflow-x-auto', body: 'sm:p-4 font-mono text-[13px] leading-7' }"
+      aria-label="Skills directory listing"
+    >
+      <div class="mb-1 text-dimmed">
+        total {{ p.skills.length }}
+      </div>
 
       <div
         v-for="skill in p.skills"
         :key="skill.name"
-        class="skills-ls__row"
+        class="grid grid-cols-[9.5ch_1.5ch_7ch_9ch_5ch_12ch_minmax(12ch,max-content)_minmax(10ch,1fr)] items-baseline gap-x-[1ch] rounded px-0.5 hover:bg-primary/10"
       >
-        <span class="skills-ls__mode t-dim">-rwxr-xr-x</span>
-        <span class="skills-ls__nlink t-dim">1</span>
-        <span class="skills-ls__owner">holden</span>
-        <span class="skills-ls__group t-dim">{{ skill.category }}</span>
-        <span class="skills-ls__size t-dim">{{ skill.size.padStart(4, " ") }}</span>
-        <span class="skills-ls__mtime t-dim">{{ skill.mtime }}</span>
-        <span class="skills-ls__name">
-          <span class="text-primary">{{ skill.name }}</span><span class="t-dim">.{{ skill.ext }}</span>
+        <span class="tabular-nums text-dimmed">-rwxr-xr-x</span>
+        <span class="tabular-nums text-dimmed">1</span>
+        <span class="tabular-nums text-highlighted">holden</span>
+        <span class="tabular-nums text-dimmed">{{ skill.category }}</span>
+        <span class="tabular-nums text-right text-dimmed">{{ skill.size.padStart(4, " ") }}</span>
+        <span class="tabular-nums text-dimmed">{{ skill.mtime }}</span>
+        <span class="font-medium">
+          <span class="text-primary">{{ skill.name }}</span><span class="text-dimmed">.{{ skill.ext }}</span>
         </span>
-        <span class="skills-ls__note t-dim"># {{ skill.note }}</span>
+        <span class="truncate text-dimmed"># {{ skill.note }}</span>
       </div>
-    </div>
+    </UCard>
 
-    <div class="skills-legend">
-      <div class="skills-legend__title t-dim">// groups</div>
-      <div class="skills-legend__items">
-        <span
+    <UCard
+      variant="outline"
+      class="mt-4"
+      :ui="{ root: 'bg-elevated/20 ring-dashed', body: 'sm:p-4' }"
+    >
+      <div class="mb-2 text-xs text-dimmed">
+        // groups
+      </div>
+      <div class="grid grid-cols-1 gap-1.5 text-[12.5px] sm:grid-cols-2 lg:grid-cols-3">
+        <div
           v-for="group in groups"
           :key="group"
-          class="skills-legend__item"
+          class="flex items-baseline gap-2.5"
         >
-          <span class="t-dim">drwxr-xr-x</span>
+          <span class="text-dimmed">drwxr-xr-x</span>
           <span class="text-primary">{{ group }}/</span>
-          <span class="t-dim">{{ countIn(group) }}</span>
-        </span>
+          <span class="text-dimmed">{{ countIn(group) }}</span>
+        </div>
       </div>
-    </div>
+    </UCard>
 
-    <div class="term-hint t-dim">
+    <p class="mt-3 text-xs text-dimmed">
       sorted like <span class="text-primary">ls -lt</span> · most-reached tools first · frontend · backend · infra
-    </div>
+    </p>
   </div>
 </template>
 

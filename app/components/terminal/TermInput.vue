@@ -1,20 +1,26 @@
 <template>
   <form
-    class="term-input"
+    class="border-t border-default bg-black/70 px-4 py-3 sm:px-5"
     @submit.prevent="submit"
   >
-    <label class="sr-only" for="term-cmd">Command</label>
-    <div class="term-input__row">
-      <span class="term-prompt-line__ps1" aria-hidden="true">
-        <span class="t-user">holden</span><span class="t-dim">@</span><span class="t-host">site</span>
-        <span class="t-dim"> </span><span class="t-path">~</span>
-        <span class="t-dim"> </span><span class="t-prompt-char">%</span>
+    <label
+      class="sr-only"
+      for="term-cmd"
+    >Command</label>
+    <div class="flex min-w-0 items-center gap-2.5">
+      <span
+        class="shrink-0 whitespace-nowrap text-[13.5px]"
+        aria-hidden="true"
+      >
+        <span class="font-medium text-highlighted">holden</span><span class="text-dimmed">@</span><span class="text-primary">site</span>
+        <span class="text-dimmed"> </span><span class="text-muted">~</span>
+        <span class="text-dimmed"> </span><span class="text-highlighted">%</span>
       </span>
       <input
         id="term-cmd"
         ref="inputEl"
         v-model="value"
-        class="term-input__field"
+        class="min-w-0 flex-1 border-0 bg-transparent p-0.5 text-[13.5px] text-highlighted caret-primary outline-none placeholder:text-white/20 disabled:opacity-55"
         type="text"
         autocomplete="off"
         autocapitalize="off"
@@ -26,11 +32,11 @@
         @keydown="onKeydown"
       >
     </div>
-    <div class="term-input__hint t-dim">
+    <div class="mt-1.5 flex flex-wrap gap-x-1 text-[11px] text-dimmed">
       <span>enter ↵ run</span>
-      <span class="t-sep">·</span>
+      <span class="text-dimmed">·</span>
       <span>tab autocomplete</span>
-      <span class="t-sep">·</span>
+      <span class="text-dimmed">·</span>
       <span>↑↓ history</span>
     </div>
   </form>

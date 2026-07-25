@@ -1,12 +1,11 @@
 <template>
-  <span
+  <UBadge
     v-if="data"
-    class="t-pct"
-    :class="isPositive ? 'is-up' : 'is-down'"
-  >
-    <span class="t-pct__arrow">{{ isPositive ? "▲" : "▼" }}</span>
-    {{ data.change }}%
-  </span>
+    :color="isPositive ? 'success' : 'error'"
+    variant="subtle"
+    size="sm"
+    :label="`${isPositive ? '▲' : '▼'} ${data.change}%`"
+  />
 </template>
 
 <script setup lang="ts">

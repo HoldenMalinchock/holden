@@ -1,22 +1,34 @@
 <template>
-  <div class="term-block">
-    <div class="term-section-label">// hobbies · off the keyboard</div>
-    <div class="term-hobbies">
-      <div
+  <div>
+    <div class="mb-2.5 text-xs tracking-wide text-dimmed">
+      // hobbies · off the keyboard
+    </div>
+
+    <div class="grid gap-3">
+      <UCard
         v-for="hobby in p.hobbies"
         :key="hobby.name"
-        class="term-card term-hobby"
+        variant="subtle"
+        :ui="{ root: 'bg-elevated/30 ring-default', body: 'sm:p-4' }"
       >
-        <div class="term-hobby__top">
-          <span class="term-hobby__name">{{ hobby.name }}</span>
-          <span class="term-tag">{{ hobby.tag }}</span>
+        <div class="flex items-center justify-between gap-3">
+          <span class="font-semibold text-highlighted">{{ hobby.name }}</span>
+          <UBadge
+            color="primary"
+            variant="subtle"
+            size="sm"
+            :label="hobby.tag"
+          />
         </div>
-        <p class="term-prose">{{ hobby.detail }}</p>
-      </div>
+        <p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+          {{ hobby.detail }}
+        </p>
+      </UCard>
     </div>
-    <div class="term-hint t-dim">
+
+    <p class="mt-3 text-xs text-dimmed">
       pickleball rallies · market microstructure · golf putts that almost drop
-    </div>
+    </p>
   </div>
 </template>
 

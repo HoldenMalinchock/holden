@@ -1,6 +1,8 @@
 <template>
-  <div class="term-block">
-    <div class="term-section-label">// contact · open channel</div>
+  <div>
+    <div class="mb-2.5 text-xs tracking-wide text-dimmed">
+      // contact · open channel
+    </div>
 
     <UCard
       variant="subtle"
@@ -14,7 +16,7 @@
       <template #header>
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h2 class="text-base sm:text-lg font-semibold text-highlighted tracking-tight">
+            <h2 class="text-base font-semibold tracking-tight text-highlighted sm:text-lg">
               Have a problem worth solving?
             </h2>
             <p class="mt-1 text-sm text-muted">
@@ -30,7 +32,7 @@
         </div>
       </template>
 
-      <p class="text-sm text-toned leading-relaxed max-w-2xl">
+      <p class="max-w-2xl text-sm leading-relaxed text-toned">
         Always happy to chat about full-stack work, trading systems, Deno/Nuxt,
         or whatever it is you're shipping. Email is fastest.
       </p>

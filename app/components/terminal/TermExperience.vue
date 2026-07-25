@@ -1,91 +1,125 @@
 <template>
-  <div class="term-block">
-    <div class="term-section-label">// experience · {{ p.experiences.length }} roles</div>
-    <ol class="term-timeline">
+  <div>
+    <div class="mb-2.5 text-xs tracking-wide text-dimmed">
+      // experience · {{ p.experiences.length }} roles
+    </div>
+
+    <ol class="m-0 grid list-none gap-3.5 p-0">
       <!-- Same client engagement: 3 Reasons ← Adapt Forward -->
-      <li class="term-timeline__contract">
+      <li class="relative grid list-none gap-3.5 pr-7">
         <div
-          class="term-timeline__contract-rail"
+          class="exp-brace"
           aria-hidden="true"
         >
-          <span class="term-timeline__contract-cap is-top" />
-          <span class="term-timeline__contract-line" />
-          <span class="term-timeline__contract-label">same contract</span>
-          <span class="term-timeline__contract-cap is-bottom" />
+          <span class="exp-brace__cap exp-brace__cap--top" />
+          <span class="exp-brace__line" />
+          <span class="exp-brace__label">same contract</span>
+          <span class="exp-brace__cap exp-brace__cap--bottom" />
         </div>
 
         <div
           v-for="(exp, i) in contractRoles"
           :key="exp.company + exp.startYear"
-          class="term-timeline__item"
+          class="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3"
         >
-          <div class="term-timeline__gutter">
-            <span
-              class="term-timeline__year"
-              :class="{ 'is-current': i === 0 }"
-            >{{ exp.startYear }}</span>
+          <div class="flex flex-col items-center">
+            <UBadge
+              :color="i === 0 ? 'primary' : 'neutral'"
+              :variant="i === 0 ? 'subtle' : 'outline'"
+              size="sm"
+              :label="exp.startYear"
+            />
             <span
               v-if="i < contractRoles.length - 1"
-              class="term-timeline__rail"
+              class="mt-1.5 min-h-5 w-px flex-1 bg-white/15"
             />
           </div>
-          <div class="term-card">
-            <div class="term-card__head">
+          <UCard
+            variant="subtle"
+            :ui="{ root: 'bg-elevated/30 ring-default', body: 'sm:p-4' }"
+          >
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
               <div>
-                <div class="term-card__title">{{ exp.title }}</div>
-                <div class="term-card__sub">
+                <div class="font-semibold text-highlighted">
+                  {{ exp.title }}
+                </div>
+                <div class="mt-0.5 text-[12.5px]">
                   <span class="text-primary">{{ exp.company }}</span>
-                  <span class="t-dim">·</span>
-                  <span class="t-dim">{{ exp.location }}</span>
+                  <span class="mx-1.5 text-dimmed">·</span>
+                  <span class="text-dimmed">{{ exp.location }}</span>
                 </div>
               </div>
-              <div class="term-card__meta">{{ exp.date }}</div>
+              <div class="whitespace-nowrap text-xs text-dimmed">
+                {{ exp.date }}
+              </div>
             </div>
-            <p class="term-prose">{{ exp.description }}</p>
-            <div class="term-tags">
-              <span
+            <p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+              {{ exp.description }}
+            </p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <UBadge
                 v-for="tech in exp.technologies"
                 :key="tech"
-                class="term-tag"
-              >{{ tech }}</span>
+                color="primary"
+                variant="subtle"
+                size="sm"
+                :label="tech"
+              />
             </div>
-          </div>
+          </UCard>
         </div>
       </li>
 
       <li
         v-for="(exp, i) in earlierRoles"
         :key="exp.company + exp.startYear"
-        class="term-timeline__item"
+        class="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3"
       >
-        <div class="term-timeline__gutter">
-          <span class="term-timeline__year">{{ exp.startYear }}</span>
+        <div class="flex flex-col items-center">
+          <UBadge
+            color="neutral"
+            variant="outline"
+            size="sm"
+            :label="exp.startYear"
+          />
           <span
             v-if="i < earlierRoles.length - 1"
-            class="term-timeline__rail"
+            class="mt-1.5 min-h-5 w-px flex-1 bg-white/15"
           />
         </div>
-        <div class="term-card">
-          <div class="term-card__head">
+        <UCard
+          variant="subtle"
+          :ui="{ root: 'bg-elevated/30 ring-default', body: 'sm:p-4' }"
+        >
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
             <div>
-              <div class="term-card__title">{{ exp.title }}</div>
-              <div class="term-card__sub">
+              <div class="font-semibold text-highlighted">
+                {{ exp.title }}
+              </div>
+              <div class="mt-0.5 text-[12.5px]">
                 <span class="text-primary">{{ exp.company }}</span>
-                <span class="t-dim">·</span>
-                <span class="t-dim">{{ exp.location }}</span>
+                <span class="mx-1.5 text-dimmed">·</span>
+                <span class="text-dimmed">{{ exp.location }}</span>
               </div>
             </div>
-            <div class="term-card__meta">{{ exp.date }}</div>
+            <div class="whitespace-nowrap text-xs text-dimmed">
+              {{ exp.date }}
+            </div>
           </div>
-          <p class="term-prose">{{ exp.description }}</p>
-          <div class="term-tags">
-            <span
+          <p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+            {{ exp.description }}
+          </p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <UBadge
               v-for="tech in exp.technologies"
               :key="tech"
-              class="term-tag"
-            >{{ tech }}</span>
+              color="primary"
+              variant="subtle"
+              size="sm"
+              :label="tech"
+            />
           </div>
-        </div>
+        </UCard>
       </li>
     </ol>
   </div>
@@ -93,8 +127,6 @@
 
 <script setup lang="ts">
 const p = usePortfolio()
-
-// First two roles are one continuous client engagement (vendor change only).
 const contractRoles = computed(() => p.experiences.slice(0, 2))
 const earlierRoles = computed(() => p.experiences.slice(2))
 </script>

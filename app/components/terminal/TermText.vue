@@ -1,6 +1,6 @@
 <template>
   <div
-    class="term-block term-text"
+    class="text-[13px]"
     :class="toneClass"
   >
     <div
@@ -20,12 +20,12 @@ const props = defineProps<{
 
 const toneClass = computed(() => {
   switch (props.tone) {
-    case "ok": return "is-ok"
-    case "warn": return "is-warn"
-    case "err": return "is-err"
-    case "accent": return "is-accent"
-    case "dim": return "is-dim"
-    default: return ""
+    case "ok": return "text-success"
+    case "warn": return "text-warning"
+    case "err": return "text-error"
+    case "accent": return "text-primary"
+    case "dim": return "text-dimmed"
+    default: return "text-highlighted"
   }
 })
 </script>

@@ -1,19 +1,26 @@
 <template>
-  <div class="term-block">
-    <div class="term-section-label">
+  <div>
+    <div class="mb-2.5 text-xs tracking-wide text-dimmed">
       // now
-      <span class="t-dim">— {{ asOf }}</span>
+      <span>— {{ asOf }}</span>
     </div>
-    <p class="term-prose">{{ p.nowBlurb }}</p>
-    <div class="term-kv term-kv--grid">
+    <p class="max-w-3xl text-sm leading-relaxed text-muted">
+      {{ p.nowBlurb }}
+    </p>
+    <dl class="mt-4 grid gap-2 text-[13px] sm:grid-cols-2">
       <div
         v-for="item in p.nowItems"
         :key="item.label"
+        class="flex gap-3"
       >
-        <span class="t-key">{{ item.label.toLowerCase() }}</span>
-        <span class="t-val">{{ item.detail }}</span>
+        <dt class="w-28 shrink-0 text-dimmed">
+          {{ item.label.toLowerCase() }}
+        </dt>
+        <dd class="text-highlighted">
+          {{ item.detail }}
+        </dd>
       </div>
-    </div>
+    </dl>
   </div>
 </template>
 

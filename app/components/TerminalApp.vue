@@ -1,50 +1,76 @@
 <template>
   <div
-    class="term-app"
+    class="term-app font-mono"
     role="application"
     aria-label="Holden portfolio terminal"
     @click="onAppClick"
   >
-    <div class="term-shell">
-      <aside class="term-sidebar" aria-label="Available commands">
-        <div class="term-sidebar__head">
-          <div class="term-sidebar__title">commands</div>
-          <div class="t-dim term-sidebar__sub">type to run</div>
+    <div class="relative z-1 grid h-full min-h-dvh grid-cols-1 md:grid-cols-[220px_1fr]">
+      <!-- Command reference (not clickable) -->
+      <aside
+        class="flex min-h-0 select-none flex-col border-b border-default bg-black/55 p-2 md:border-b-0 md:border-r"
+        aria-label="Available commands"
+      >
+        <div class="mb-2 border-b border-default px-2 pb-3 pt-1">
+          <div class="text-[11px] uppercase tracking-[0.14em] text-muted">
+            commands
+          </div>
+          <div class="mt-0.5 text-[11px] text-dimmed">
+            type to run
+          </div>
         </div>
 
-        <div class="term-sidebar__nav">
+        <div class="grid flex-1 grid-cols-3 gap-0.5 overflow-auto md:flex md:grid-cols-none md:flex-col">
           <div
             v-for="tool in tools"
             :key="tool.cmd"
-            class="term-tool"
-            :class="{ 'is-active': activeCommand === tool.cmd }"
+            class="rounded-md border border-transparent px-2 py-2"
+            :class="activeCommand === tool.cmd
+              ? 'border-primary/40 bg-primary/10'
+              : ''"
           >
-            <span class="term-tool__cmd">{{ tool.cmd }}</span>
-            <span class="term-tool__summary">{{ tool.summary }}</span>
+            <div
+              class="text-[12.5px]"
+              :class="activeCommand === tool.cmd ? 'text-primary' : 'text-primary/80'"
+            >
+              {{ tool.cmd }}
+            </div>
+            <div class="hidden text-[11px] text-dimmed md:block">
+              {{ tool.summary }}
+            </div>
           </div>
         </div>
 
-        <div class="term-sidebar__foot">
-          <div class="term-tool term-tool--ghost">
-            <span class="term-tool__cmd">/help</span>
-            <span class="term-tool__summary">all commands</span>
+        <div class="mt-2 grid grid-cols-2 gap-0.5 border-t border-default pt-2 md:flex md:flex-col">
+          <div class="rounded-md px-2 py-2">
+            <div class="text-[12.5px] text-muted">
+              /help
+            </div>
+            <div class="hidden text-[11px] text-dimmed md:block">
+              all commands
+            </div>
           </div>
-          <div class="term-tool term-tool--ghost">
-            <span class="term-tool__cmd">/clear</span>
-            <span class="term-tool__summary">reset screen</span>
+          <div class="rounded-md px-2 py-2">
+            <div class="text-[12.5px] text-muted">
+              /clear
+            </div>
+            <div class="hidden text-[11px] text-dimmed md:block">
+              reset screen
+            </div>
           </div>
         </div>
       </aside>
 
-      <div class="term-main">
+      <!-- Main terminal surface -->
+      <div class="term-main relative flex min-h-0 min-w-0 flex-col bg-black/35">
         <div
           ref="scroller"
-          class="term-stream"
+          class="relative z-1 flex-1 overflow-auto px-4 py-5 sm:px-5"
         >
           <div
             v-if="view.block"
             :key="view.id"
-            class="term-stream__entry term-pop"
+            class="term-pop w-full max-w-5xl"
           >
             <TerminalTermWhoami v-if="view.block.kind === 'whoami'" />
             <TerminalTermNow v-else-if="view.block.kind === 'now'" />
@@ -66,7 +92,7 @@
 
           <div
             v-else
-            class="term-empty t-dim"
+            class="pt-1 text-[13px] text-dimmed"
           >
             type a command to begin · /help
           </div>
@@ -74,6 +100,7 @@
 
         <TerminalTermInput
           ref="inputRef"
+          class="relative z-1"
           :disabled="running"
           placeholder="/experience"
           :autocomplete="autocomplete"

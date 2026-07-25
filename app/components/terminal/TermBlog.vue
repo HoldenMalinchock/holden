@@ -1,48 +1,58 @@
 <template>
-  <div class="term-block">
-    <div class="term-section-label">// blog · recent writing</div>
+  <div>
+    <div class="mb-2.5 text-xs tracking-wide text-dimmed">
+      // blog · recent writing
+    </div>
 
     <div
       v-if="pending"
-      class="t-dim"
+      class="text-dimmed"
     >
-      fetching feed<span class="t-cursor-blink">…</span>
+      fetching feed…
     </div>
 
-    <ul
+    <div
       v-else-if="posts && posts.length"
-      class="term-list"
+      class="grid gap-2"
     >
-      <li
+      <a
         v-for="post in posts"
         :key="post.url"
+        :href="post.url"
+        target="_blank"
+        rel="noopener"
+        class="block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
-        <a
-          :href="post.url"
-          target="_blank"
-          rel="noopener"
-          class="term-list__row"
+        <UCard
+          variant="subtle"
+          :ui="{ root: 'bg-elevated/30 ring-default hover:bg-primary/5 hover:ring-primary/30 transition-colors', body: 'sm:p-3.5' }"
         >
-          <span class="term-list__title">{{ post.title }}</span>
-          <span class="term-list__meta">{{ formatDate(post.published) }}</span>
-        </a>
-      </li>
-    </ul>
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-medium text-highlighted">{{ post.title }}</span>
+            <span class="text-xs text-dimmed">{{ formatDate(post.published) }}</span>
+          </div>
+        </UCard>
+      </a>
+    </div>
 
     <div
       v-else
-      class="t-dim"
+      class="text-dimmed"
     >
       no posts loaded — visit the blog directly.
     </div>
 
-    <div class="term-actions">
-      <a
-        :href="blogBase"
+    <div class="mt-3">
+      <UButton
+        :to="blogBase"
         target="_blank"
-        rel="noopener"
-        class="term-link term-link--accent"
-      >↗ read all posts</a>
+        external
+        color="primary"
+        variant="soft"
+        size="sm"
+        trailing-icon="i-lucide-arrow-up-right"
+        label="Read all posts"
+      />
     </div>
   </div>
 </template>

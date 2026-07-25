@@ -1,20 +1,53 @@
 <template>
-  <div class="term-block">
-    <div class="term-section-label">// whoami</div>
-    <div class="term-whoami">
-      <div class="term-whoami__name">{{ p.name }}</div>
-      <div class="term-whoami__role">
-        {{ p.role }}
-        <span class="t-dim">@</span>
-        <span class="t-accent">{{ p.company }}</span>
-      </div>
-      <div class="term-whoami__tag">{{ p.tagline }}</div>
-      <div class="term-kv">
-        <div><span class="t-key">location</span><span class="t-val">{{ p.location }}</span></div>
-        <div><span class="t-key">focus</span><span class="t-val">TypeScript · Nuxt · Deno</span></div>
-        <div><span class="t-key">email</span><span class="t-val"><a :href="`mailto:${p.email}`">{{ p.email }}</a></span></div>
-      </div>
+  <div>
+    <div class="mb-2.5 text-xs tracking-wide text-dimmed">
+      // whoami
     </div>
+    <div class="text-xl font-semibold tracking-tight text-highlighted sm:text-2xl">
+      {{ p.name }}
+    </div>
+    <div class="mt-1 text-muted">
+      {{ p.role }}
+      <span class="text-dimmed">@</span>
+      <span class="text-primary">{{ p.company }}</span>
+    </div>
+    <div class="mt-2.5 max-w-xl text-highlighted">
+      {{ p.tagline }}
+    </div>
+    <dl class="mt-4 grid gap-1 text-[13px]">
+      <div class="flex gap-3">
+        <dt class="w-28 shrink-0 text-dimmed">
+          location
+        </dt>
+        <dd class="text-highlighted">
+          {{ p.location }}
+        </dd>
+      </div>
+      <div class="flex gap-3">
+        <dt class="w-28 shrink-0 text-dimmed">
+          focus
+        </dt>
+        <dd class="text-highlighted">
+          TypeScript · Nuxt · Deno
+        </dd>
+      </div>
+      <div class="flex gap-3">
+        <dt class="w-28 shrink-0 text-dimmed">
+          email
+        </dt>
+        <dd>
+          <UButton
+            :to="`mailto:${p.email}`"
+            external
+            color="primary"
+            variant="link"
+            size="sm"
+            class="px-0"
+            :label="p.email"
+          />
+        </dd>
+      </div>
+    </dl>
   </div>
 </template>
 
