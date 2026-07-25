@@ -6,13 +6,13 @@
 
     <UCard
       variant="subtle"
-      :ui="{ root: 'bg-elevated/30 ring-default', body: 'sm:p-4' }"
+      :ui="{ root: 'bg-black/55 ring-white/10', body: 'p-3.5 sm:p-4' }"
     >
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-3">
         <div
           v-for="link in p.social"
           :key="link.label"
-          class="flex flex-wrap items-center gap-3"
+          class="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:gap-3"
         >
           <span class="w-24 shrink-0 text-dimmed">{{ link.label.toLowerCase() }}</span>
           <UButton
@@ -22,7 +22,7 @@
             color="primary"
             variant="link"
             size="sm"
-            class="px-0"
+            class="h-auto max-w-full justify-start truncate px-0"
             :label="link.handle ?? link.href"
           />
         </div>

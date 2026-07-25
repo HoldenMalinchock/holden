@@ -7,26 +7,27 @@
     <UCard
       variant="subtle"
       :ui="{
-        root: 'bg-elevated/40 ring-default',
-        body: 'sm:p-6',
-        header: 'sm:px-6 sm:pt-5 sm:pb-0',
-        footer: 'sm:px-6 sm:pb-5 sm:pt-0',
+        root: 'bg-black/55 ring-white/10',
+        body: 'p-4 sm:p-6',
+        header: 'px-4 pt-4 pb-0 sm:px-6 sm:pt-5',
+        footer: 'px-4 pb-4 pt-0 sm:px-6 sm:pb-5',
       }"
     >
       <template #header>
-        <div class="flex flex-wrap items-start justify-between gap-3">
-          <div>
+        <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between sm:gap-3">
+          <div class="min-w-0">
             <h2 class="text-base font-semibold tracking-tight text-highlighted sm:text-lg">
               Have a problem worth solving?
             </h2>
             <p class="mt-1 text-sm text-muted">
-              Full-stack · trading systems · Deno/Nuxt · whatever you're shipping
+              Full-stack · trading systems · Deno/Nuxt
             </p>
           </div>
           <UBadge
             color="primary"
             variant="subtle"
             size="sm"
+            class="w-fit"
             label="open channel"
           />
         </div>
@@ -38,13 +39,15 @@
       </p>
 
       <template #footer>
-        <div class="flex flex-wrap items-center gap-2 pt-1">
+        <div class="flex flex-col gap-2 pt-1 sm:flex-row sm:flex-wrap sm:items-center">
           <UButton
             :to="`mailto:${p.email}`"
             external
             color="primary"
             variant="solid"
             size="md"
+            block
+            class="sm:w-auto"
             icon="i-lucide-mail"
             :label="p.email"
           />
@@ -55,6 +58,8 @@
             color="neutral"
             variant="outline"
             size="md"
+            block
+            class="sm:w-auto"
             icon="i-lucide-linkedin"
             label="LinkedIn"
           />
@@ -65,6 +70,8 @@
             color="neutral"
             variant="ghost"
             size="md"
+            block
+            class="sm:w-auto"
             icon="i-lucide-github"
             label="GitHub"
           />

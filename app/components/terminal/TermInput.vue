@@ -1,43 +1,51 @@
 <template>
   <form
-    class="border-t border-default bg-black/70 px-4 py-3 sm:px-5"
+    class="border-t border-default bg-black/80 px-3 py-2.5 pb-[max(0.65rem,env(safe-area-inset-bottom))] sm:px-5 sm:py-3"
     @submit.prevent="submit"
   >
     <label
       class="sr-only"
       for="term-cmd"
     >Command</label>
-    <div class="flex min-w-0 items-center gap-2.5">
+    <div class="flex min-w-0 items-center gap-2">
+      <!-- Compact prompt on small screens -->
       <span
-        class="shrink-0 whitespace-nowrap text-[13.5px]"
+        class="shrink-0 whitespace-nowrap text-[13px] sm:text-[13.5px]"
         aria-hidden="true"
       >
-        <span class="font-medium text-highlighted">holden</span><span class="text-dimmed">@</span><span class="text-primary">site</span>
-        <span class="text-dimmed"> </span><span class="text-muted">~</span>
-        <span class="text-dimmed"> </span><span class="text-highlighted">%</span>
+        <span class="sm:hidden text-highlighted">%</span>
+        <span class="hidden sm:inline">
+          <span class="font-medium text-highlighted">holden</span><span class="text-dimmed">@</span><span class="text-primary">site</span>
+          <span class="text-dimmed"> </span><span class="text-muted">~</span>
+          <span class="text-dimmed"> </span><span class="text-highlighted">%</span>
+        </span>
       </span>
       <input
         id="term-cmd"
         ref="inputEl"
         v-model="value"
-        class="min-w-0 flex-1 border-0 bg-transparent p-0.5 text-[13.5px] text-highlighted caret-primary outline-none placeholder:text-white/20 disabled:opacity-55"
+        class="min-w-0 flex-1 border-0 bg-transparent py-2 text-base text-highlighted caret-primary outline-none placeholder:text-white/25 disabled:opacity-55 sm:py-0.5 sm:text-[13.5px]"
         type="text"
         autocomplete="off"
         autocapitalize="off"
         autocorrect="off"
         spellcheck="false"
-        enterkeyhint="send"
+        enterkeyhint="go"
+        inputmode="text"
         :placeholder="placeholder"
         :disabled="disabled"
         @keydown="onKeydown"
       >
     </div>
-    <div class="mt-1.5 flex flex-wrap gap-x-1 text-[11px] text-dimmed">
+    <div class="mt-1 hidden flex-wrap gap-x-1 text-[11px] text-dimmed sm:flex">
       <span>enter ↵ run</span>
-      <span class="text-dimmed">·</span>
+      <span>·</span>
       <span>tab autocomplete</span>
-      <span class="text-dimmed">·</span>
+      <span>·</span>
       <span>↑↓ history</span>
+    </div>
+    <div class="mt-0.5 text-[10px] text-dimmed sm:hidden">
+      type a command · e.g. /experience
     </div>
   </form>
 </template>

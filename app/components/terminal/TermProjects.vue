@@ -9,14 +9,14 @@
         v-for="(project, i) in p.projects"
         :key="project.title"
         variant="subtle"
-        :ui="{ root: 'bg-elevated/30 ring-default', body: 'sm:p-4' }"
+        :ui="{ root: 'bg-black/55 ring-white/10', body: 'p-3.5 sm:p-4' }"
       >
-        <div class="flex flex-wrap items-baseline justify-between gap-2">
-          <div class="font-semibold text-highlighted">
+        <div class="flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-2">
+          <div class="min-w-0 text-sm font-semibold text-highlighted sm:text-base">
             <span class="text-dimmed">{{ String(i + 1).padStart(2, "0") }}</span>
             {{ project.title }}
           </div>
-          <div class="flex items-center gap-2.5 text-xs">
+          <div class="flex flex-wrap items-center gap-2 text-xs">
             <TradingPercent v-if="project.showTradingPercent" />
             <UBadge
               v-if="project.status"
@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+        <p class="mt-2 text-sm leading-relaxed text-muted">
           {{ project.description }}
         </p>
 
@@ -43,7 +43,7 @@
           />
         </div>
 
-        <div class="mt-3 flex flex-wrap gap-2">
+        <div class="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <UButton
             v-if="project.github"
             :to="project.github"
@@ -52,6 +52,8 @@
             color="neutral"
             variant="ghost"
             size="sm"
+            block
+            class="sm:w-auto"
             icon="i-lucide-github"
             label="Code"
           />
@@ -63,6 +65,8 @@
             color="primary"
             variant="soft"
             size="sm"
+            block
+            class="sm:w-auto"
             trailing-icon="i-lucide-arrow-up-right"
             label="Live"
           />

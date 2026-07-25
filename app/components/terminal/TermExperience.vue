@@ -4,11 +4,11 @@
       // experience · {{ p.experiences.length }} roles
     </div>
 
-    <ol class="m-0 grid list-none gap-3.5 p-0">
+    <ol class="m-0 grid list-none gap-3 p-0 sm:gap-3.5">
       <!-- Same client engagement: 3 Reasons ← Adapt Forward -->
-      <li class="relative grid list-none gap-3.5 pr-7">
+      <li class="relative grid list-none gap-3 pr-0 sm:gap-3.5 sm:pr-7">
         <div
-          class="exp-brace"
+          class="exp-brace hidden sm:block"
           aria-hidden="true"
         >
           <span class="exp-brace__cap exp-brace__cap--top" />
@@ -17,12 +17,20 @@
           <span class="exp-brace__cap exp-brace__cap--bottom" />
         </div>
 
+        <UBadge
+          class="w-fit sm:hidden"
+          color="primary"
+          variant="subtle"
+          size="sm"
+          label="same contract · vendor change"
+        />
+
         <div
           v-for="(exp, i) in contractRoles"
           :key="exp.company + exp.startYear"
-          class="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3"
+          class="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-2 sm:grid-cols-[3.25rem_minmax(0,1fr)] sm:gap-3"
         >
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center pt-0.5">
             <UBadge
               :color="i === 0 ? 'primary' : 'neutral'"
               :variant="i === 0 ? 'subtle' : 'outline'"
@@ -36,24 +44,24 @@
           </div>
           <UCard
             variant="subtle"
-            :ui="{ root: 'bg-black/55 ring-white/10', body: 'sm:p-4' }"
+            :ui="{ root: 'bg-black/55 ring-white/10', body: 'p-3.5 sm:p-4' }"
           >
-            <div class="flex flex-wrap items-baseline justify-between gap-2">
-              <div>
-                <div class="font-semibold text-highlighted">
+            <div class="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-2">
+              <div class="min-w-0">
+                <div class="text-sm font-semibold text-highlighted sm:text-base">
                   {{ exp.title }}
                 </div>
-                <div class="mt-0.5 text-[12.5px]">
+                <div class="mt-0.5 text-xs sm:text-[12.5px]">
                   <span class="text-primary">{{ exp.company }}</span>
                   <span class="mx-1.5 text-dimmed">·</span>
                   <span class="text-dimmed">{{ exp.location }}</span>
                 </div>
               </div>
-              <div class="whitespace-nowrap text-xs text-dimmed">
+              <div class="text-xs text-dimmed">
                 {{ exp.date }}
               </div>
             </div>
-            <p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+            <p class="mt-2 text-sm leading-relaxed text-muted">
               {{ exp.description }}
             </p>
             <div class="mt-3 flex flex-wrap gap-1.5">
@@ -73,9 +81,9 @@
       <li
         v-for="(exp, i) in earlierRoles"
         :key="exp.company + exp.startYear"
-        class="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3"
+        class="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-2 sm:grid-cols-[3.25rem_minmax(0,1fr)] sm:gap-3"
       >
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center pt-0.5">
           <UBadge
             color="neutral"
             variant="outline"
@@ -89,24 +97,24 @@
         </div>
         <UCard
           variant="subtle"
-          :ui="{ root: 'bg-black/55 ring-white/10', body: 'sm:p-4' }"
+          :ui="{ root: 'bg-black/55 ring-white/10', body: 'p-3.5 sm:p-4' }"
         >
-          <div class="flex flex-wrap items-baseline justify-between gap-2">
-            <div>
-              <div class="font-semibold text-highlighted">
+          <div class="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-2">
+            <div class="min-w-0">
+              <div class="text-sm font-semibold text-highlighted sm:text-base">
                 {{ exp.title }}
               </div>
-              <div class="mt-0.5 text-[12.5px]">
+              <div class="mt-0.5 text-xs sm:text-[12.5px]">
                 <span class="text-primary">{{ exp.company }}</span>
                 <span class="mx-1.5 text-dimmed">·</span>
                 <span class="text-dimmed">{{ exp.location }}</span>
               </div>
             </div>
-            <div class="whitespace-nowrap text-xs text-dimmed">
+            <div class="text-xs text-dimmed">
               {{ exp.date }}
             </div>
           </div>
-          <p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+          <p class="mt-2 text-sm leading-relaxed text-muted">
             {{ exp.description }}
           </p>
           <div class="mt-3 flex flex-wrap gap-1.5">
