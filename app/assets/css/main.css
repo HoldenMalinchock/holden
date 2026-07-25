@@ -187,20 +187,20 @@ body {
   }
 }
 
-/* whoami ASCII banner — edge fade / outer dissolve */
+/* whoami ASCII banner — soft outer fade (keep center readable) */
 .whoami-ascii-wrap {
   position: relative;
   width: 100%;
   max-width: 56rem;
   overflow: hidden;
   -webkit-mask-image:
-    radial-gradient(ellipse 78% 72% at 50% 48%, #000 28%, transparent 74%),
-    linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    radial-gradient(ellipse 92% 88% at 50% 50%, #000 52%, transparent 88%),
+    linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
   mask-image:
-    radial-gradient(ellipse 78% 72% at 50% 48%, #000 28%, transparent 74%),
-    linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    radial-gradient(ellipse 92% 88% at 50% 50%, #000 52%, transparent 88%),
+    linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
   -webkit-mask-composite: source-in, source-in;
   mask-composite: intersect;
 }
@@ -211,10 +211,10 @@ body {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 90% 80% at 50% 50%, transparent 40%, var(--term-bg) 88%),
-    linear-gradient(90deg, var(--term-bg) 0%, transparent 14%, transparent 86%, var(--term-bg) 100%),
-    linear-gradient(180deg, var(--term-bg) 0%, transparent 22%, transparent 78%, var(--term-bg) 100%);
-  opacity: 0.85;
+    radial-gradient(ellipse 95% 90% at 50% 50%, transparent 62%, var(--term-bg) 96%),
+    linear-gradient(90deg, var(--term-bg) 0%, transparent 6%, transparent 94%, var(--term-bg) 100%),
+    linear-gradient(180deg, var(--term-bg) 0%, transparent 10%, transparent 90%, var(--term-bg) 100%);
+  opacity: 0.45;
 }
 
 .whoami-ascii {
@@ -226,6 +226,6 @@ body {
   font-weight: 500;
   overflow: visible;
   filter:
-    drop-shadow(0 0 12px color-mix(in oklab, var(--ui-primary, #818cf8) 35%, transparent))
-    drop-shadow(0 0 28px color-mix(in oklab, var(--ui-primary, #818cf8) 18%, transparent));
+    drop-shadow(0 0 10px color-mix(in oklab, var(--ui-primary, #818cf8) 28%, transparent))
+    drop-shadow(0 0 22px color-mix(in oklab, var(--ui-primary, #818cf8) 12%, transparent));
 }
