@@ -132,7 +132,6 @@
           ref="inputRef"
           class="relative z-1 shrink-0"
           :disabled="running"
-          placeholder="/experience"
           :autocomplete="autocomplete"
           :history-prev="historyPrev"
           :history-next="historyNext"

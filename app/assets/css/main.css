@@ -142,4 +142,57 @@ body {
   .term-pop {
     animation: none;
   }
+
+  .term-block-caret {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Mac Terminal–style block caret */
+.term-input-field {
+  caret-color: transparent;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.term-input-field::selection {
+  background: color-mix(in oklab, var(--ui-primary, #818cf8) 35%, transparent);
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.term-block-caret {
+  display: inline-block;
+  width: 0.65em;
+  height: 1.15em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--ui-primary, #818cf8);
+  opacity: 0;
+  flex-shrink: 0;
+}
+
+.term-block-caret.is-on {
+  animation: term-caret-blink 1.05s step-end infinite;
+}
+
+@keyframes term-caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* whoami ASCII banner */
+.whoami-ascii {
+  font-family: var(--term-mono);
+  font-size: clamp(5.5px, 1.65vw, 13px);
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  white-space: pre;
+  font-weight: 500;
 }
