@@ -12,6 +12,13 @@
     </div>
 
     <div
+      v-else-if="error"
+      class="text-dimmed"
+    >
+      feed error — visit the blog directly.
+    </div>
+
+    <div
       v-else-if="posts && posts.length"
       class="grid gap-2"
     >
@@ -25,9 +32,9 @@
       >
         <UCard
           variant="subtle"
-          :ui="{ root: 'bg-elevated/30 ring-default hover:bg-primary/5 hover:ring-primary/30 transition-colors', body: 'sm:p-3.5' }"
+          :ui="{ root: 'bg-black/55 ring-white/10 hover:bg-primary/5 hover:ring-primary/30 transition-colors', body: 'p-3.5 sm:p-3.5' }"
         >
-          <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-2">
             <span class="font-medium text-highlighted">{{ post.title }}</span>
             <span class="text-xs text-dimmed">{{ formatDate(post.published) }}</span>
           </div>
@@ -66,26 +73,12 @@ interface Post {
 
 const blogBase = "https://holden-blog.hmalinch.deno.net"
 
-const { data: posts, pending } = await useAsyncData<Post[]>("blog-feed", async () => {
-  try {
-    const text = await $fetch<string>(`${blogBase}/feed`, { responseType: "text" })
-    const entries = [...text.matchAll(/<entry>([\s\S]*?)<\/entry>/g)]
-    const parsed: Post[] = entries.map(([, body]) => {
-      const rawTitle = body.match(/<title[^>]*>([\s\S]*?)<\/title>/)?.[1] ?? ""
-      const title = rawTitle.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/, "$1").trim()
-      const href = body.match(/<link[^>]*href="([^"]+)"/)?.[1] ?? ""
-      const url = href.startsWith("http") ? href : `${blogBase}${href.startsWith("/") ? "" : "/"}${href}`
-      const published = body.match(/<published>([\s\S]*?)<\/published>/)?.[1]
-        ?? body.match(/<updated>([\s\S]*?)<\/updated>/)?.[1]
-        ?? ""
-      return { title, url, published }
-    })
-    parsed.sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime())
-    return parsed.slice(0, 5)
-  }
-  catch {
-    return []
-  }
+// Same-origin Nitro proxy (server/api/blog-feed.get.ts) — browser can't
+// fetch the Atom feed directly (no CORS), same issue as trading %.
+const { data: posts, pending, error } = await useFetch<Post[]>("/api/blog-feed", {
+  key: "blog-feed",
+  lazy: true,
+  server: true,
 })
 
 function formatDate(iso: string) {
