@@ -50,6 +50,7 @@ export function usePortfolio() {
   const social: SocialLink[] = [
     { label: "GitHub", href: "https://github.com/HoldenMalinchock", handle: "HoldenMalinchock" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/holden-malinchock-0bbbb6140/", handle: "holden-malinchock" },
+    { label: "X", href: "https://x.com/DenoDisciple", handle: "@DenoDisciple" },
     { label: "Email", href: `mailto:${email}`, handle: email },
     { label: "Blog", href: "https://holden-blog.hmalinch.deno.net", handle: "holden-blog" },
   ]
