@@ -12,11 +12,14 @@
       label="same contract · vendor change (top 2)"
     />
 
-    <!-- Single list so the left spine runs continuously 1→2→3→4 -->
-    <ol class="relative m-0 grid list-none gap-3 p-0 sm:gap-3.5 sm:pr-7">
-      <!-- Right brace only spans the first two roles (same contract) -->
+    <!--
+      CSS grid timeline:
+      col1 year · col2 card · col3 brace (desktop)
+      brace uses grid-row: 1 / span 2 so it runs top of card 1 → bottom of card 2
+    -->
+    <ol class="exp-grid m-0 list-none p-0">
       <div
-        class="exp-brace exp-brace--top-pair hidden sm:block"
+        class="exp-brace hidden sm:block"
         aria-hidden="true"
       >
         <span class="exp-brace__cap exp-brace__cap--top" />
@@ -28,27 +31,26 @@
       <li
         v-for="(exp, i) in p.experiences"
         :key="exp.company + exp.startYear"
-        class="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-2 sm:grid-cols-[3.25rem_minmax(0,1fr)] sm:gap-3"
-        :class="{ 'exp-role--contract': i < 2 }"
+        class="exp-row contents"
       >
-        <div class="flex flex-col items-center pt-0.5">
+        <div class="exp-year flex flex-col items-center pt-0.5">
           <UBadge
             :color="i === 0 ? 'primary' : 'neutral'"
             :variant="i === 0 ? 'subtle' : 'outline'"
             size="sm"
             :label="exp.startYear"
           />
-          <!-- Spine under every year except the last — extends through row gap -->
           <span
             v-if="i < p.experiences.length - 1"
-            class="mt-1.5 w-px min-h-6 flex-1 bg-white/15 -mb-3 pb-3 sm:-mb-3.5 sm:pb-3.5"
+            class="exp-spine mt-1.5 w-px min-h-6 flex-1 bg-white/15"
             aria-hidden="true"
           />
         </div>
 
         <UCard
           variant="subtle"
-          :ui="{ root: 'bg-black/55 ring-white/10', body: 'p-3.5 sm:p-4' }"
+          class="exp-card min-w-0"
+          :ui="{ root: 'bg-black/55 ring-white/10 h-full', body: 'p-3.5 sm:p-4' }"
         >
           <div class="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-2">
             <div class="min-w-0">
