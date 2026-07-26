@@ -100,9 +100,9 @@ import type { Skill } from "~/composables/usePortfolio"
 const p = usePortfolio()
 
 const groups = computed(() => {
-  const seen = new Set<Skill["category"]>()
-  for (const s of p.skills) seen.add(s.category)
-  return [...seen]
+  const order: Skill["category"][] = ["backend", "lang", "frontend", "data", "infra", "agents"]
+  const present = new Set(p.skills.map(s => s.category))
+  return order.filter(g => present.has(g))
 })
 
 function countIn(group: Skill["category"]) {
