@@ -6,7 +6,7 @@
 
     <div class="grid gap-3">
       <UCard
-        v-for="hobby in p.hobbies"
+        v-for="hobby in portfolio.hobbies"
         :key="hobby.name"
         variant="subtle"
         :ui="{ root: 'bg-elevated/30 ring-default', body: 'sm:p-4' }"
@@ -33,5 +33,5 @@
 </template>
 
 <script setup lang="ts">
-const p = usePortfolio()
+const portfolio = usePortfolio()
 </script>

@@ -10,7 +10,7 @@
     >
       <div class="grid gap-2">
         <div
-          v-for="cmd in p.commands"
+          v-for="cmd in portfolio.commands"
           :key="cmd.name"
           class="flex flex-col gap-0.5 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-2"
         >
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-const p = usePortfolio()
+const portfolio = usePortfolio()
 
 function dots(name: string) {
   const width = 16

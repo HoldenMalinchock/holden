@@ -7,7 +7,7 @@
     <!-- Mobile: stacked skill cards (readable without horizontal scroll) -->
     <div class="grid gap-2 md:hidden">
       <UCard
-        v-for="skill in p.skills"
+        v-for="skill in portfolio.skills"
         :key="skill.name"
         variant="subtle"
         :ui="{ root: 'bg-black/55 ring-white/10', body: 'p-3.5' }"
@@ -44,12 +44,12 @@
       aria-label="Skills directory listing"
     >
       <div class="mb-2 text-dimmed">
-        total {{ p.skills.length }}
+        total {{ portfolio.skills.length }}
       </div>
 
       <div class="min-w-[56rem]">
         <div
-          v-for="skill in p.skills"
+          v-for="skill in portfolio.skills"
           :key="skill.name"
           class="grid grid-cols-[10ch_2ch_8ch_11ch_6ch_13ch_18ch_minmax(14ch,1fr)] items-baseline gap-x-3 whitespace-nowrap rounded px-1 hover:bg-primary/10"
         >
@@ -97,15 +97,15 @@
 <script setup lang="ts">
 import type { Skill } from "~/composables/usePortfolio"
 
-const p = usePortfolio()
+const portfolio = usePortfolio()
 
 const groups = computed(() => {
-  const order: Skill["category"][] = ["backend", "lang", "frontend", "data", "infra", "agents"]
-  const present = new Set(p.skills.map(s => s.category))
-  return order.filter(g => present.has(g))
+  const categoryOrder: Skill["category"][] = ["backend", "lang", "frontend", "data", "infra", "agents"]
+  const presentCategories = new Set(portfolio.skills.map(skill => skill.category))
+  return categoryOrder.filter(category => presentCategories.has(category))
 })
 
 function countIn(group: Skill["category"]) {
-  return p.skills.filter(s => s.category === group).length
+  return portfolio.skills.filter(skill => skill.category === group).length
 }
 </script>

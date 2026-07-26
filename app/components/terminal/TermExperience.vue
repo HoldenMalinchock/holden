@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-2.5 text-xs tracking-wide text-dimmed">
-      // experience · {{ p.experiences.length }} roles
+      // experience · {{ portfolio.experiences.length }} roles
     </div>
 
     <UBadge
@@ -29,19 +29,19 @@
       </div>
 
       <li
-        v-for="(exp, i) in p.experiences"
-        :key="exp.company + exp.startYear"
+        v-for="(experience, index) in portfolio.experiences"
+        :key="experience.company + experience.startYear"
         class="exp-row contents"
       >
         <div class="exp-year flex flex-col items-center pt-0.5">
           <UBadge
-            :color="i === 0 ? 'primary' : 'neutral'"
-            :variant="i === 0 ? 'subtle' : 'outline'"
+            :color="index === 0 ? 'primary' : 'neutral'"
+            :variant="index === 0 ? 'subtle' : 'outline'"
             size="sm"
-            :label="exp.startYear"
+            :label="experience.startYear"
           />
           <span
-            v-if="i < p.experiences.length - 1"
+            v-if="index < portfolio.experiences.length - 1"
             class="exp-spine mt-1.5 w-px min-h-6 flex-1 bg-white/15"
             aria-hidden="true"
           />
@@ -55,24 +55,24 @@
           <div class="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-2">
             <div class="min-w-0">
               <div class="text-sm font-semibold text-highlighted sm:text-base">
-                {{ exp.title }}
+                {{ experience.title }}
               </div>
               <div class="mt-0.5 text-xs sm:text-[12.5px]">
-                <span class="text-primary">{{ exp.company }}</span>
+                <span class="text-primary">{{ experience.company }}</span>
                 <span class="mx-1.5 text-dimmed">·</span>
-                <span class="text-dimmed">{{ exp.location }}</span>
+                <span class="text-dimmed">{{ experience.location }}</span>
               </div>
             </div>
             <div class="text-xs text-dimmed">
-              {{ exp.date }}
+              {{ experience.date }}
             </div>
           </div>
           <p class="mt-2 text-sm leading-relaxed text-muted">
-            {{ exp.description }}
+            {{ experience.description }}
           </p>
           <div class="mt-3 flex flex-wrap gap-1.5">
             <UBadge
-              v-for="tech in exp.technologies"
+              v-for="tech in experience.technologies"
               :key="tech"
               color="primary"
               variant="subtle"
@@ -87,5 +87,5 @@
 </template>
 
 <script setup lang="ts">
-const p = usePortfolio()
+const portfolio = usePortfolio()
 </script>

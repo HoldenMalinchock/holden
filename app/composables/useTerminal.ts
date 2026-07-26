@@ -134,18 +134,20 @@ export function useTerminal() {
   }
 
   function autocomplete(partial: string): string | null {
-    const p = normalize(partial).toLowerCase()
-    if (!p) return null
-    const needle = p.startsWith("/") ? p : `/${p}`
+    const normalizedPartial = normalize(partial).toLowerCase()
+    if (!normalizedPartial) return null
+    const needle = normalizedPartial.startsWith("/")
+      ? normalizedPartial
+      : `/${normalizedPartial}`
     const hits = portfolio.commands
-      .map(c => c.name)
+      .map(command => command.name)
       .filter(name => name.startsWith(needle))
     if (hits.length === 1) return hits[0] ?? null
-    for (const cmd of portfolio.commands) {
-      for (const a of cmd.aliases) {
-        const full = `/${a}`
-        if (full.startsWith(needle) || a.startsWith(needle.replace(/^\//, ""))) {
-          return cmd.name
+    for (const command of portfolio.commands) {
+      for (const alias of command.aliases) {
+        const fullAlias = `/${alias}`
+        if (fullAlias.startsWith(needle) || alias.startsWith(needle.replace(/^\//, ""))) {
+          return command.name
         }
       }
     }

@@ -1,19 +1,19 @@
 <template>
   <div>
     <div class="mb-2.5 text-xs tracking-wide text-dimmed">
-      // projects · {{ p.projects.length }} builds
+      // projects · {{ portfolio.projects.length }} builds
     </div>
 
     <div class="grid gap-3">
       <UCard
-        v-for="(project, i) in p.projects"
+        v-for="(project, index) in portfolio.projects"
         :key="project.title"
         variant="subtle"
         :ui="{ root: 'bg-black/55 ring-white/10', body: 'p-3.5 sm:p-4' }"
       >
         <div class="flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-2">
           <div class="min-w-0 text-sm font-semibold text-highlighted sm:text-base">
-            <span class="text-dimmed">{{ String(i + 1).padStart(2, "0") }}</span>
+            <span class="text-dimmed">{{ String(index + 1).padStart(2, "0") }}</span>
             {{ project.title }}
           </div>
           <div class="flex flex-wrap items-center gap-2.5">
@@ -77,5 +77,5 @@
 </template>
 
 <script setup lang="ts">
-const p = usePortfolio()
+const portfolio = usePortfolio()
 </script>

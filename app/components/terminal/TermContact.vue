@@ -33,7 +33,7 @@
 
       <div class="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
         <UButton
-          :to="`mailto:${p.email}`"
+          :to="`mailto:${portfolio.email}`"
           external
           color="primary"
           variant="solid"
@@ -41,7 +41,7 @@
           block
           class="sm:w-auto"
           icon="i-lucide-mail"
-          :label="p.email"
+          :label="portfolio.email"
         />
         <UButton
           to="https://www.linkedin.com/in/holden-malinchock-0bbbb6140/"
@@ -73,5 +73,5 @@
 </template>
 
 <script setup lang="ts">
-const p = usePortfolio()
+const portfolio = usePortfolio()
 </script>

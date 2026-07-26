@@ -16,13 +16,13 @@
       :ui="{ root: 'bg-black/55 ring-white/10', body: 'p-4 sm:p-5' }"
     >
       <p class="text-sm leading-relaxed text-highlighted sm:text-base sm:leading-relaxed">
-        {{ p.nowBlurb }}
+        {{ portfolio.nowBlurb }}
       </p>
     </UCard>
 
     <div class="mt-4 grid gap-2 sm:grid-cols-2">
       <UCard
-        v-for="item in p.nowItems"
+        v-for="item in portfolio.nowItems"
         :key="item.label"
         variant="subtle"
         :ui="{ root: 'bg-black/40 ring-white/10', body: 'p-3.5 sm:p-4' }"
@@ -60,6 +60,6 @@
 </template>
 
 <script setup lang="ts">
-const p = usePortfolio()
+const portfolio = usePortfolio()
 const asOf = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })
 </script>

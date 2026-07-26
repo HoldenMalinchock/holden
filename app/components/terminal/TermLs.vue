@@ -13,15 +13,15 @@
 </template>
 
 <script setup lang="ts">
-const p = usePortfolio()
+const portfolio = usePortfolio()
 const listing = computed(() => {
-  const names = p.commands.map(c => c.name.replace(/^\//, ""))
-  const cols = 3
-  const colWidth = 16
+  const commandNames = portfolio.commands.map(cmd => cmd.name.replace(/^\//, ""))
+  const columnCount = 3
+  const columnWidth = 16
   const rows: string[] = []
-  for (let i = 0; i < names.length; i += cols) {
-    const slice = names.slice(i, i + cols)
-    rows.push(slice.map(n => n.padEnd(colWidth)).join(""))
+  for (let index = 0; index < commandNames.length; index += columnCount) {
+    const rowNames = commandNames.slice(index, index + columnCount)
+    rows.push(rowNames.map(name => name.padEnd(columnWidth)).join(""))
   }
   return rows.join("\n")
 })

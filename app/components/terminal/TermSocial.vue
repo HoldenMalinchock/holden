@@ -10,7 +10,7 @@
     >
       <div class="flex flex-col gap-3">
         <div
-          v-for="link in p.social"
+          v-for="link in portfolio.social"
           :key="link.label"
           class="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-center sm:gap-3"
         >
@@ -32,5 +32,5 @@
 </template>
 
 <script setup lang="ts">
-const p = usePortfolio()
+const portfolio = usePortfolio()
 </script>
