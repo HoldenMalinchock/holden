@@ -63,7 +63,7 @@
 
       <!-- Main terminal surface -->
       <div class="term-main relative flex min-h-0 min-w-0 flex-1 flex-col bg-black/35">
-        <!-- Mobile: compact horizontal command chips -->
+        <!-- Mobile: compact horizontal command chips (tap to run — mobile only) -->
         <div
           class="relative z-1 shrink-0 border-b border-default bg-black/60 md:hidden"
           aria-label="Available commands"
@@ -73,23 +73,31 @@
               commands
             </div>
             <div class="truncate text-[10px] text-dimmed">
-              type below · /help
+              tap a chip · or type below
             </div>
           </div>
           <div class="flex gap-1.5 overflow-x-auto px-3 pb-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div
+            <UButton
               v-for="tool in tools"
               :key="tool.cmd"
-              class="shrink-0 rounded-full border px-2.5 py-1 text-[11px] whitespace-nowrap"
-              :class="activeCommand === tool.cmd
-                ? 'border-primary/50 bg-primary/15 text-primary'
-                : 'border-white/10 bg-white/5 text-primary/80'"
-            >
-              {{ tool.cmd }}
-            </div>
-            <div class="shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-muted whitespace-nowrap">
-              /help
-            </div>
+              size="xs"
+              :color="activeCommand === tool.cmd ? 'primary' : 'neutral'"
+              :variant="activeCommand === tool.cmd ? 'soft' : 'outline'"
+              class="shrink-0 rounded-full"
+              :label="tool.cmd"
+              :disabled="running"
+              :aria-current="activeCommand === tool.cmd ? 'page' : undefined"
+              @click.stop="runCommand(tool.cmd)"
+            />
+            <UButton
+              size="xs"
+              :color="activeCommand === '/help' ? 'primary' : 'neutral'"
+              :variant="activeCommand === '/help' ? 'soft' : 'outline'"
+              class="shrink-0 rounded-full"
+              label="/help"
+              :disabled="running"
+              @click.stop="runCommand('/help')"
+            />
           </div>
         </div>
 
@@ -175,6 +183,14 @@ async function onSubmit(value: string) {
   await nextTick()
   if (scroller.value) scroller.value.scrollTop = 0
   focusInput()
+}
+
+/** Mobile command chips only — desktop sidebar stays type-to-run. */
+async function runCommand(command: string) {
+  if (running.value) return
+  await execute(command)
+  await nextTick()
+  if (scroller.value) scroller.value.scrollTop = 0
 }
 
 watch(

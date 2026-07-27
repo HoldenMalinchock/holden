@@ -9,15 +9,12 @@
     >Command</label>
     <div class="flex min-w-0 items-center gap-2">
       <span
-        class="shrink-0 whitespace-nowrap text-[13px] sm:text-[13.5px]"
+        class="shrink-0 whitespace-nowrap text-[12px] sm:text-[13.5px]"
         aria-hidden="true"
       >
-        <span class="text-highlighted sm:hidden">%</span>
-        <span class="hidden sm:inline">
-          <span class="font-medium text-highlighted">holden</span><span class="text-dimmed">@</span><span class="text-primary">site</span>
-          <span class="text-dimmed"> </span><span class="text-muted">~</span>
-          <span class="text-dimmed"> </span><span class="text-highlighted">%</span>
-        </span>
+        <span class="font-medium text-highlighted">holden</span><span class="text-dimmed">@</span><span class="text-primary">site</span>
+        <span class="text-dimmed"> </span><span class="text-muted">~</span>
+        <span class="text-dimmed"> </span><span class="text-highlighted">%</span>
       </span>
 
       <!-- Custom block caret (Mac Terminal style) -->
