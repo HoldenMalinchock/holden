@@ -63,7 +63,7 @@
 
       <!-- Main terminal surface -->
       <div class="term-main relative flex min-h-0 min-w-0 flex-1 flex-col bg-black/35">
-        <!-- Mobile: compact horizontal command chips -->
+        <!-- Mobile: compact horizontal command chips (tap to run — mobile only) -->
         <div
           class="relative z-1 shrink-0 border-b border-default bg-black/60 md:hidden"
           aria-label="Available commands"
@@ -73,23 +73,33 @@
               commands
             </div>
             <div class="truncate text-[10px] text-dimmed">
-              type below · /help
+              tap a chip · or type below
             </div>
           </div>
           <div class="flex gap-1.5 overflow-x-auto px-3 pb-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div
+            <button
               v-for="tool in tools"
               :key="tool.cmd"
-              class="shrink-0 rounded-full border px-2.5 py-1 text-[11px] whitespace-nowrap"
+              type="button"
+              class="shrink-0 rounded-full border px-2.5 py-1 text-[11px] whitespace-nowrap transition-colors active:scale-[0.98]"
               :class="activeCommand === tool.cmd
                 ? 'border-primary/50 bg-primary/15 text-primary'
                 : 'border-white/10 bg-white/5 text-primary/80'"
+              :disabled="running"
+              :aria-current="activeCommand === tool.cmd ? 'page' : undefined"
+              @click.stop="runCommand(tool.cmd)"
             >
               {{ tool.cmd }}
-            </div>
-            <div class="shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-muted whitespace-nowrap">
+            </button>
+            <button
+              type="button"
+              class="shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-muted whitespace-nowrap transition-colors active:scale-[0.98]"
+              :class="activeCommand === '/help' ? 'border-primary/50 bg-primary/15 text-primary' : ''"
+              :disabled="running"
+              @click.stop="runCommand('/help')"
+            >
               /help
-            </div>
+            </button>
           </div>
         </div>
 
@@ -175,6 +185,14 @@ async function onSubmit(value: string) {
   await nextTick()
   if (scroller.value) scroller.value.scrollTop = 0
   focusInput()
+}
+
+/** Mobile command chips only — desktop sidebar stays type-to-run. */
+async function runCommand(command: string) {
+  if (running.value) return
+  await execute(command)
+  await nextTick()
+  if (scroller.value) scroller.value.scrollTop = 0
 }
 
 watch(
