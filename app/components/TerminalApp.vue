@@ -77,29 +77,27 @@
             </div>
           </div>
           <div class="flex gap-1.5 overflow-x-auto px-3 pb-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <button
+            <UButton
               v-for="tool in tools"
               :key="tool.cmd"
-              type="button"
-              class="shrink-0 rounded-full border px-2.5 py-1 text-[11px] whitespace-nowrap transition-colors active:scale-[0.98]"
-              :class="activeCommand === tool.cmd
-                ? 'border-primary/50 bg-primary/15 text-primary'
-                : 'border-white/10 bg-white/5 text-primary/80'"
+              size="xs"
+              :color="activeCommand === tool.cmd ? 'primary' : 'neutral'"
+              :variant="activeCommand === tool.cmd ? 'soft' : 'outline'"
+              class="shrink-0 rounded-full"
+              :label="tool.cmd"
               :disabled="running"
               :aria-current="activeCommand === tool.cmd ? 'page' : undefined"
               @click.stop="runCommand(tool.cmd)"
-            >
-              {{ tool.cmd }}
-            </button>
-            <button
-              type="button"
-              class="shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-muted whitespace-nowrap transition-colors active:scale-[0.98]"
-              :class="activeCommand === '/help' ? 'border-primary/50 bg-primary/15 text-primary' : ''"
+            />
+            <UButton
+              size="xs"
+              :color="activeCommand === '/help' ? 'primary' : 'neutral'"
+              :variant="activeCommand === '/help' ? 'soft' : 'outline'"
+              class="shrink-0 rounded-full"
+              label="/help"
               :disabled="running"
               @click.stop="runCommand('/help')"
-            >
-              /help
-            </button>
+            />
           </div>
         </div>
 
