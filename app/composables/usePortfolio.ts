@@ -55,6 +55,11 @@ export function usePortfolio() {
       handle: "HoldenMalinchock",
     },
     {
+      label: "JSR",
+      href: "https://jsr.io/@hmalinchock",
+      handle: "@hmalinchock",
+    },
+    {
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/holden-malinchock-0bbbb6140/",
       handle: "holden-malinchock",
